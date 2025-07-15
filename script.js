@@ -1,72 +1,114 @@
 document.addEventListener('DOMContentLoaded', () => {
   const ramos = Array.from(document.querySelectorAll('.ramo'));
 
-  // Inicializar cada ramo: si tiene prerrequisito, inicialmente inactivo
+  // Crear un mapa para buscar ramo por nombre
+  const mapaRamos = new Map();
   ramos.forEach(ramo => {
-    const prerrequisitos = ramo.dataset.prerrequisitos.trim();
-    if (prerrequisitos !== "") {
-      setInactive(ramo);
-    } else {
-      setActive(ramo);
-    }
-
-    // Añadir span para nombre (para tachado sólo del texto)
-    const nombreTexto = ramo.textContent.trim();
-    ramo.innerHTML = `<span class="nombre">${nombreTexto}</span><div class="tooltip">${formatDescripcion(ramo.dataset.descripcion)}</div>`;
+    mapaRamos.set(ramo.dataset.nombre, ramo);
   });
 
-  // Al hacer click, toggle aprobado / no aprobado
+  // Inicializar cada ramo
+  ramos.forEach(ramo => {
+    const prerrequisitos = ramo.dataset.prerrequisitos.trim();
+
+    // Poner span con nombre para tachado sólo nombre
+    const nombreTexto = ramo.textContent.trim();
+    ramo.innerHTML = `<span class="nombre">${nombreTexto}</span><div class="tooltip">${formatDescripcion(ramo.dataset.descripcion)}</div>`;
+
+    // Definir estado inicial
+    // Si semestre I (prerrequisitos vacíos y semestre I) activo
+    // Si prerrequisitos vacíos pero semestre distinto a I, inactivo (hasta activar otro ramo)
+    // Si tiene prerrequisitos, inactivo
+    const semestre = ramo.closest('.semestre').dataset.semestre;
+    if (prerrequisitos === "") {
+      if (semestre === "I") {
+        setActive(ramo);
+      } else {
+        setInactive(ramo);
+      }
+    } else {
+      setInactive(ramo);
+    }
+  });
+
+  // Click en ramo
   ramos.forEach(ramo => {
     ramo.addEventListener('click', () => {
-      if (ramo.classList.contains('inactivo')) return; // No hacer nada si inactivo
+      if (ramo.classList.contains('inactivo')) return; // no hace nada si inactivo
 
-      const aprobado = ramo.classList.toggle('activo'); // Alterna clase activo (morado)
+      // Toggle estado aprobado
+      const estaActivo = ramo.classList.toggle('activo');
 
-      // Toggle tachado sólo del nombre
+      // Tachado sólo nombre
       const nombreSpan = ramo.querySelector('span.nombre');
-      if (aprobado) {
+      if (estaActivo) {
         nombreSpan.classList.add('tachado');
       } else {
         nombreSpan.classList.remove('tachado');
       }
 
-      // Activar/desactivar prerrequisitos
-      actualizarPrerrequisitos();
+      // Luego actualiza prerrequisitos y el resto de semestres según reglas
+      actualizarEstados();
     });
   });
 
-  // Función que actualiza los prerrequisitos según aprobados
-  function actualizarPrerrequisitos() {
+  // Función para actualizar todos los estados después de cada click
+  function actualizarEstados() {
+    // 1. Detectar ramos aprobados
+    const aprobados = new Set(
+      ramos.filter(r => r.classList.contains('activo')).map(r => r.dataset.nombre)
+    );
+
+    // 2. Recorrer cada ramo y decidir si activo o inactivo:
     ramos.forEach(ramo => {
-      const prereqText = ramo.dataset.prerrequisitos.trim();
-      if (prereqText === "") {
-        // Si no tiene prerrequisitos, siempre activo
+      const prerrequisitos = ramo.dataset.prerrequisitos.trim();
+      const semestre = ramo.closest('.semestre').dataset.semestre;
+
+      // Si ramo aprobado, siempre activo (color morado y tachado)
+      if (aprobados.has(ramo.dataset.nombre)) {
         setActive(ramo);
         return;
       }
 
-      // Si tiene varios prerrequisitos, separar por ";"
-      const prereqList = prereqText.split(';').map(x => x.trim());
-
-      // Verificar que todos los prerrequisitos estén aprobados
-      const todosAprobados = prereqList.every(prerrequisitoNombre => {
-        const ramoPrerrequisito = ramos.find(r => r.dataset.nombre === prerrequisitoNombre);
-        return ramoPrerrequisito && ramoPrerrequisito.classList.contains('activo');
-      });
-
-      if (todosAprobados) {
+      // Si semestre I y sin prerrequisitos: activo siempre (excepto si está aprobado que ya está activo)
+      if (semestre === "I" && prerrequisitos === "") {
         setActive(ramo);
-      } else {
-        setInactive(ramo);
-        // Si está activo, quitar activo
-        ramo.classList.remove('activo');
-        // Quitar tachado si hay
-        ramo.querySelector('span.nombre').classList.remove('tachado');
+        return;
+      }
+
+      // Para ramos con prerrequisitos: activar solo si TODOS sus prerrequisitos están aprobados
+      if (prerrequisitos !== "") {
+        const prereqList = prerrequisitos.split(';').map(s => s.trim());
+        const todosAprobados = prereqList.every(p => aprobados.has(p));
+        if (todosAprobados) {
+          setActive(ramo);
+        } else {
+          setInactive(ramo);
+          removeAprobadoYTachado(ramo);
+        }
+        return;
+      }
+
+      // Para ramos sin prerrequisito en semestres II a X:
+      // Deben activarse solo si algún ramo de su mismo semestre está aprobado
+      if (prerrequisitos === "" && semestre !== "I") {
+        // Buscar si existe ramo aprobado en ese semestre distinto a este ramo
+        const otroAprobado = ramos.some(r => {
+          return r.closest('.semestre').dataset.semestre === semestre && r !== ramo && aprobados.has(r.dataset.nombre);
+        });
+
+        if (otroAprobado) {
+          setActive(ramo);
+        } else {
+          setInactive(ramo);
+          removeAprobadoYTachado(ramo);
+        }
       }
     });
   }
 
-  // Funciones para setear clases y estilos
+  // Funciones auxiliares
+
   function setActive(ramo) {
     ramo.classList.remove('inactivo');
     ramo.style.pointerEvents = 'auto';
@@ -77,9 +119,23 @@ document.addEventListener('DOMContentLoaded', () => {
     ramo.style.pointerEvents = 'none';
   }
 
-  // Función para formatear descripción con punto y aparte en vez de ";"
+  function removeAprobadoYTachado(ramo) {
+    ramo.classList.remove('activo');
+    const nombreSpan = ramo.querySelector('span.nombre');
+    if (nombreSpan) nombreSpan.classList.remove('tachado');
+  }
+
   function formatDescripcion(desc) {
     if (!desc) return "";
-    return desc.split('.').map(s => s.trim()).filter(Boolean).join('.<br><br>') + '.';
+    // reemplazar puntos y comas por punto y aparte
+    return desc
+      .replace(/;/g, '.')
+      .split('.')
+      .map(s => s.trim())
+      .filter(Boolean)
+      .join('.<br><br>') + '.';
   }
+
+  // Ejecutar actualización inicial para respetar prerrequisitos y activar/inactivar
+  actualizarEstados();
 });
