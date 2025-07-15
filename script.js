@@ -1,55 +1,71 @@
 document.addEventListener("DOMContentLoaded", () => {
   const ramos = document.querySelectorAll(".ramo");
 
-  // Marca primer semestre para no desactivarlos
-  ramos.forEach(ramo => {
-    if (ramo.dataset.semestre && ramo.dataset.semestre === "1") {
-      ramo.classList.add("primer-semestre");
-    }
-  });
-
-  // Función para actualizar estados de prerrequisitos y estilos
   function actualizarEstados() {
-    // Primero, todos inactivos excepto primer semestre y aprobados
+    // Mapa semestre => array de ramos aprobados en ese semestre
+    const aprobadosPorSemestre = {};
+
+    // Guardar qué ramos están aprobados por semestre
     ramos.forEach(ramo => {
-      if (!ramo.classList.contains("aprobado") && !ramo.classList.contains("primer-semestre")) {
-        ramo.classList.add("inactivo");
+      const semestre = ramo.dataset.semestre;
+      if (!aprobadosPorSemestre[semestre]) aprobadosPorSemestre[semestre] = [];
+      if (ramo.classList.contains("aprobado")) {
+        aprobadosPorSemestre[semestre].push(ramo.id);
       }
     });
 
-    // Ahora activar los ramos que tienen prerrequisitos aprobados o sin prerrequisitos pero están activados por semestre
+    // Para cada ramo, decidir si está activo o no
     ramos.forEach(ramo => {
-      const prereqs = ramo.dataset.prerequisitos ? ramo.dataset.prerequisitos.split(",").filter(s => s.trim() !== "") : [];
+      const semestre = ramo.dataset.semestre;
+      const prereqsRaw = ramo.dataset.prerequisitos || "";
+      const prereqs = prereqsRaw.split(",").map(s => s.trim()).filter(Boolean);
+
+      if (ramo.classList.contains("aprobado")) {
+        ramo.classList.remove("inactivo");
+        return; // aprobado siempre activo
+      }
+
+      if (semestre === "1") {
+        // Primer semestre siempre activo si no está aprobado
+        ramo.classList.remove("inactivo");
+        return;
+      }
+
+      // Si no tiene prerrequisitos
       if (prereqs.length === 0) {
-        // Si no tiene prerrequisito, activar sólo si es primer semestre o si está marcado para activarse (evitamos que ramos sin prerreq queden inactivos)
-        if (ramo.classList.contains("primer-semestre")) {
+        // Si hay al menos un ramo aprobado en su semestre, activar
+        if (aprobadosPorSemestre[semestre] && aprobadosPorSemestre[semestre].length > 0) {
           ramo.classList.remove("inactivo");
         } else {
-          // Ver si hay algún ramo aprobado del mismo semestre que habilite su activación (según lo que pediste)
-          // Aquí podemos decidir que se activen si hay algún ramo aprobado en el mismo semestre
-          // Para simplificar, dejamos que ramos sin prerreq que no sean del primer semestre permanezcan inactivos hasta que haya actividad
-          // Si quieres puedes cambiar la lógica aquí
+          // sino, inactivo
+          ramo.classList.add("inactivo");
         }
+        return;
+      }
+
+      // Si tiene prerrequisitos: activamos solo si TODOS sus prerrequisitos están aprobados
+      const todosAprobados = prereqs.every(id => {
+        const preRamo = document.getElementById(id);
+        return preRamo && preRamo.classList.contains("aprobado");
+      });
+
+      if (todosAprobados) {
+        ramo.classList.remove("inactivo");
       } else {
-        // Si todos los prerrequisitos están aprobados, se activa
-        const todosAprobados = prereqs.every(id => {
-          const pre = document.getElementById(id);
-          return pre && pre.classList.contains("aprobado");
-        });
-        if (todosAprobados) ramo.classList.remove("inactivo");
+        ramo.classList.add("inactivo");
       }
     });
   }
 
-  // Manejar click en ramo
+  // Click para marcar/desmarcar aprobado
   ramos.forEach(ramo => {
     ramo.addEventListener("click", () => {
-      if (ramo.classList.contains("inactivo")) return;
+      if (ramo.classList.contains("inactivo")) return; // no hacer nada si inactivo
       ramo.classList.toggle("aprobado");
       actualizarEstados();
     });
   });
 
-  // Inicializamos
+  // Inicializar estados
   actualizarEstados();
 });
