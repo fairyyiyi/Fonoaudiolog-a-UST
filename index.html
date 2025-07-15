@@ -7,80 +7,83 @@
   <style>
     body {
       margin: 0;
-      padding: 2rem;
+      padding: 1rem;
       background-color: #ffe6f0; /* rosa pastel claro */
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: 12px;
       color: #333;
     }
 
     h1 {
       text-align: center;
       color: #b347a3;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       text-shadow: 1px 1px 3px #f0c0e9;
+      font-size: 1.6rem;
     }
 
     .malla {
       display: flex;
-      gap: 1rem;
+      gap: 0.7rem;
       overflow-x: auto;
-      padding-bottom: 1rem;
+      padding-bottom: 0.5rem;
       scrollbar-width: thin;
       scrollbar-color: #b347a3 #fce9f8;
     }
     .malla::-webkit-scrollbar {
-      height: 8px;
+      height: 7px;
     }
     .malla::-webkit-scrollbar-thumb {
       background: #b347a3;
-      border-radius: 4px;
+      border-radius: 3px;
     }
     .malla::-webkit-scrollbar-track {
       background: #fce9f8;
-      border-radius: 4px;
+      border-radius: 3px;
     }
 
     .semestre {
       background: #f9d4e7; /* rosa pastel */
-      border-radius: 15px;
-      min-width: 230px;
-      max-width: 230px;
-      padding: 1rem;
+      border-radius: 12px;
+      min-width: 200px;
+      max-width: 200px;
+      padding: 0.6rem;
       display: flex;
       flex-direction: column;
       box-shadow:
-        0 0 8px 1px #f7a6d9,
-        inset 0 0 10px 1px #f7a6d9;
+        0 0 7px 1px #f7a6d9,
+        inset 0 0 8px 1px #f7a6d9;
     }
 
     .semestre h2 {
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       color: #8a2b8a;
-      text-shadow: 0 0 5px #d88acc;
+      text-shadow: 0 0 4px #d88acc;
       user-select: none;
+      font-size: 1.1rem;
     }
 
     .ramo {
       background: #f7b7d9; /* rosa medio pastel */
-      border-radius: 10px;
-      padding: 0.6rem 0.8rem;
-      margin-bottom: 0.8rem;
+      border-radius: 8px;
+      padding: 0.35rem 0.5rem;
+      margin-bottom: 0.5rem;
       cursor: pointer;
       text-align: center;
       user-select: none;
       box-shadow:
         0 0 5px 1px #eea7cf,
-        inset 0 0 8px 1px #eea7cf;
+        inset 0 0 6px 1px #eea7cf;
       transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-      min-height: 50px;
+      min-height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 600;
-      font-size: 13px;
+      font-size: 11px;
       position: relative;
+      line-height: 1.1em;
     }
 
     .ramo.aprobado {
@@ -88,8 +91,7 @@
       color: white;
       box-shadow:
         0 0 10px 2px #8a6ed8,
-        inset 0 0 10px 3px #b19cd9;
-      text-decoration: none;
+        inset 0 0 10px 2px #b19cd9;
     }
 
     .ramo.aprobado .nombre {
@@ -98,49 +100,27 @@
 
     .nombre {
       flex: 1;
+      white-space: normal;
     }
 
     .ramo.inactivo {
-      opacity: 0.45;
+      opacity: 0.4;
       cursor: not-allowed;
       pointer-events: none;
       box-shadow: none;
       color: #7a5a7a;
     }
 
-    /* Tooltip para la info opcional (puedes activar si quieres) */
-    /*
-    .ramo:hover::after {
-      content: attr(data-info);
-      position: absolute;
-      bottom: 120%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #b19cd9;
-      color: white;
-      padding: 5px 8px;
-      border-radius: 5px;
-      white-space: pre-wrap;
-      font-size: 11px;
-      box-shadow: 0 0 5px #8a6ed8;
-      z-index: 10;
-      width: 200px;
-    }
-    */
   </style>
 </head>
 <body>
 
   <h1>Malla Interactiva Fonoaudiología UST</h1>
 
-  <div class="malla" id="malla">
-
-    <!-- Los semestres se crean dinámicamente con JS -->
-
-  </div>
+  <div class="malla" id="malla"></div>
 
   <script>
-    // Datos de la malla con prerrequisitos
+    // Datos malla y prerrequisitos
     const mallaData = [
       {
         semestre: "I Semestre",
@@ -252,74 +232,64 @@
       }
     ];
 
-    // Crear mapa de ramos para activar prerrequisitos más fácil
+    // Map para guardar referencia a cada ramo
     const ramoMap = new Map();
 
     // Estado aprobado para cada ramo (nombre => boolean)
     const estadoAprobado = new Map();
 
-    // Crear cada semestre y ramos en DOM
     const mallaDiv = document.getElementById("malla");
 
     function crearRamo(ramo, semestreIndex) {
       const div = document.createElement("div");
       div.classList.add("ramo");
-      div.textContent = ramo.nombre;
+
+      const spanNombre = document.createElement("span");
+      spanNombre.classList.add("nombre");
+      spanNombre.textContent = ramo.nombre;
+      div.appendChild(spanNombre);
 
       div.dataset.nombre = ramo.nombre;
       div.dataset.semestre = semestreIndex;
       div.dataset.abre = JSON.stringify(ramo.abre);
 
-      // Contenedor nombre para tachar solo texto
-      const spanNombre = document.createElement("span");
-      spanNombre.classList.add("nombre");
-      spanNombre.textContent = ramo.nombre;
-      div.textContent = "";
-      div.appendChild(spanNombre);
-
       return div;
     }
 
+    // Función que verifica si algún ramo que abre a 'nombre' está aprobado
+    function estaActivado(nombre) {
+      for (let [otroNombre, ramoObj] of ramoMap.entries()) {
+        if (ramoObj.ramo.abre.includes(nombre) && estadoAprobado.get(otroNombre)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     function actualizarEstadoUI() {
-      // Primero desactivar todos los ramos que no sean del primer semestre ni aprobados ni con prerrequisitos desbloqueados
       for (let [nombre, ramoObj] of ramoMap.entries()) {
         const div = ramoObj.element;
         const semestreIndex = ramoObj.semestre;
 
+        // Primer semestre siempre activo
         if (semestreIndex === 0) {
           div.classList.remove("inactivo");
           div.style.pointerEvents = "auto";
         } else {
-          // Se activa solo si algún ramo que abre este ramo está aprobado
-          let activar = false;
-
-          // Buscar ramos que abren este ramo
-          for (let [otherNombre, otherRamoObj] of ramoMap.entries()) {
-            if (otherRamoObj.ramo.abre.includes(nombre) && estadoAprobado.get(otherNombre)) {
-              activar = true;
-              break;
-            }
-          }
-
-          if (activar) {
+          // Activar si está aprobado o si algún ramo que lo abre está aprobado
+          if (estadoAprobado.get(nombre)) {
+            div.classList.remove("inactivo");
+            div.style.pointerEvents = "auto";
+          } else if (estaActivado(nombre)) {
             div.classList.remove("inactivo");
             div.style.pointerEvents = "auto";
           } else {
-            // Si no está aprobado y no tiene prerrequisito aprobado
-            if (!estadoAprobado.get(nombre)) {
-              div.classList.add("inactivo");
-              div.style.pointerEvents = "none";
-            } else {
-              div.classList.remove("inactivo");
-              div.style.pointerEvents = "auto";
-            }
+            div.classList.add("inactivo");
+            div.style.pointerEvents = "none";
           }
         }
-      }
 
-      // Actualizar colores y tachado según estado aprobado
-      for (let [nombre, ramoObj] of ramoMap.entries()) {
-        const div = ramoObj.element;
+        // Cambiar clase aprobado y tachar nombre
         if (estadoAprobado.get(nombre)) {
           div.classList.add("aprobado");
         } else {
@@ -329,7 +299,6 @@
     }
 
     function guardarEstado() {
-      // Guardar estado aprobado en localStorage
       const estadoObj = {};
       for (let [nombre, aprobado] of estadoAprobado.entries()) {
         estadoObj[nombre] = aprobado;
@@ -347,13 +316,13 @@
       }
     }
 
-    // Inicializar UI y eventos
     function inicializar() {
       cargarEstado();
 
       mallaData.forEach((semestreObj, i) => {
         const semDiv = document.createElement("div");
         semDiv.classList.add("semestre");
+
         const titulo = document.createElement("h2");
         titulo.textContent = semestreObj.semestre;
         semDiv.appendChild(titulo);
@@ -362,7 +331,6 @@
           const ramoDiv = crearRamo(ramo, i);
           semDiv.appendChild(ramoDiv);
           ramoMap.set(ramo.nombre, {
-            elemento: ramoDiv,
             element: ramoDiv,
             ramo: ramo,
             semestre: i
@@ -372,14 +340,14 @@
         mallaDiv.appendChild(semDiv);
       });
 
-      // Añadir listeners después de crear todo
+      // Añadir eventos clic a los ramos
       for (let [nombre, ramoObj] of ramoMap.entries()) {
         const div = ramoObj.element;
         div.addEventListener("click", () => {
-          if (div.classList.contains("inactivo")) return; // no hacer nada si está inactivo
+          if (div.classList.contains("inactivo")) return;
 
-          const aprobado = estadoAprobado.get(nombre) || false;
-          estadoAprobado.set(nombre, !aprobado);
+          const actual = estadoAprobado.get(nombre) || false;
+          estadoAprobado.set(nombre, !actual);
 
           actualizarEstadoUI();
           guardarEstado();
@@ -390,7 +358,6 @@
     }
 
     inicializar();
-
   </script>
 </body>
 </html>
