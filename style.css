@@ -2,7 +2,7 @@
 body, html {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Evita scroll horizontal global */
+  overflow-x: hidden;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   background-color: #f8eef6; /* pastel rosado muy claro */
@@ -17,20 +17,20 @@ h1 {
 
 .malla {
   display: flex;
-  flex-wrap: nowrap; /* horizontal, no rompe línea */
+  flex-wrap: nowrap;
   gap: 15px;
-  overflow-x: auto; /* scroll horizontal */
+  overflow-x: auto;
   padding: 0 20px 15px 20px;
   scrollbar-width: thin;
-  -webkit-overflow-scrolling: touch; /* para móvil */
+  -webkit-overflow-scrolling: touch;
 }
 
 .anio {
-  min-width: 130px;
-  max-width: 130px;
-  background: #e9d4f0; /* pastel lila */
+  min-width: 140px;
+  max-width: 140px;
+  background: #f7e6f9;
   border-radius: 12px;
-  padding: 10px 6px;
+  padding: 10px 8px;
   box-shadow: 0 0 8px rgba(109, 76, 138, 0.3);
   display: flex;
   flex-direction: column;
@@ -51,13 +51,13 @@ h1 {
 }
 
 .ramo {
-  background: #f7e7fb; /* rosa pastel muy suave */
+  background: #f7e7fb;
   border-radius: 10px;
-  padding: 6px 8px;
+  padding: 8px 6px;
   box-shadow: 0 0 6px rgba(109, 76, 138, 0.15);
   cursor: pointer;
   user-select: none;
-  min-height: 60px;
+  min-height: 55px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +70,7 @@ h1 {
 }
 
 .ramo.aprobado {
-  background-color: #b59ede; /* morado pastel */
+  background-color: #b59ede;
   color: #fff;
   box-shadow: 0 0 10px #9370db;
   text-decoration: line-through;
@@ -78,10 +78,23 @@ h1 {
 
 .ramo.inactivo {
   opacity: 0.35;
-  pointer-events: none; /* no se puede clicar */
+  pointer-events: none;
 }
 
 .ramo:hover:not(.inactivo):not(.aprobado) {
   background-color: #e8d6f9;
   box-shadow: 0 0 8px #b399d4;
+}
+
+/* Scrollbar para navegadores basados en WebKit */
+.malla::-webkit-scrollbar {
+  height: 10px;
+}
+.malla::-webkit-scrollbar-track {
+  background: #f3e8fa;
+  border-radius: 10px;
+}
+.malla::-webkit-scrollbar-thumb {
+  background: #b59ede;
+  border-radius: 10px;
 }
