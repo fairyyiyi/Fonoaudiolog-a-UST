@@ -1,103 +1,59 @@
-/* Reset y básico */
-body, html {
+body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  background-color: #fff0f6; /* más rosado suave */
-  color: #5a3b53;
+  background: #fff0f5;
 }
 
-h1 {
-  text-align: center;
-  margin: 1rem 0;
-  color: #9a67a5;
-  font-weight: 700;
-}
-
-.malla {
+.malla-container {
   display: flex;
+  justify-content: space-between;
+  padding: 20px;
   flex-wrap: nowrap;
-  gap: 15px;
   overflow-x: auto;
-  padding: 0 20px 15px 20px;
-  scrollbar-width: thin;
-  -webkit-overflow-scrolling: touch;
-}
-
-.anio {
-  min-width: 130px;
-  max-width: 130px;
-  background: #f7e1f1;
-  border-radius: 14px;
-  padding: 12px 8px;
-  box-shadow: 0 0 12px rgba(255, 182, 193, 0.7);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.anio h2 {
-  font-size: 15px;
-  margin-bottom: 8px;
-  color: #9a67a5;
-  font-weight: 700;
+  box-sizing: border-box;
 }
 
 .semestre {
   display: flex;
   flex-direction: column;
-  gap: 9px;
-  width: 100%;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.semestre h3 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #8a2be2;
 }
 
 .ramo {
-  background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
-  border-radius: 14px;
-  padding: 8px 10px;
-  box-shadow:
-    0 0 12px 2px rgba(255, 182, 193, 0.7),
-    inset 0 0 10px 2px #fff0f6;
-  cursor: pointer;
-  user-select: none;
-  min-height: 65px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 160px;
+  height: 60px;
+  margin: 5px 0;
+  padding: 8px;
+  background: linear-gradient(145deg, #fdd9e5, #ffe6f0);
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ffd6e7;
   text-align: center;
-  font-size: 12px;
-  color: #5a3b53;
-  font-weight: 600;
-  line-height: 1.3;
-  word-break: break-word;
-  transition: background-color 0.4s, box-shadow 0.4s, color 0.3s;
-  position: relative;
+  font-size: 11px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.ramo:hover:not(.inactivo):not(.aprobado) {
-  background: linear-gradient(135deg, #ffb6c1, #ff8da4);
-  box-shadow:
-    0 0 18px 3px rgba(255, 105, 180, 0.8),
-    inset 0 0 12px 3px #ffd1dc;
-  color: #3e1f3b;
-}
-
-.ramo.aprobado {
-  background: linear-gradient(135deg, #b19cd9, #9a80ba);
-  color: #f2e9ff;
-  box-shadow:
-    0 0 16px 4px #9177b5,
-    inset 0 0 12px 2px #c8b6e2;
+.ramo.tachado {
   text-decoration: line-through;
-  font-weight: 700;
+  background: linear-gradient(145deg, #d6b3ff, #f3d4ff);
+  box-shadow: 0 0 12px #c084fc;
+  color: #6a0dad;
 }
 
 .ramo.inactivo {
-  opacity: 0.3;
+  opacity: 0.4;
   pointer-events: none;
-  box-shadow: none;
-  background: #f2e7f5;
-  color: #9b8c9a;
 }
-
