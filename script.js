@@ -1,109 +1,127 @@
-body {
-  margin: 0;
-  padding: 2rem;
-  background-color: #d0f0ec;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-}
+const data = {
+  "I": [
+    {
+      nombre: "Razonamiento Lógico Matemático",
+      tipo: "Asignatura Ciencias Básicas. Formación Disciplinar en el Curso de Vida.",
+      abre: ["Acústica y Biomecánica", "Estadística y Epidemiología en Fonoaudiología"]
+    },
+    {
+      nombre: "Introducción a la Fonoaudiología",
+      tipo: "Asignatura de Formación Profesional. Formación Disciplinar en el Curso de Vida. Asignatura con Actividad Práctica. Asignatura con Simulación Clínica.",
+      abre: ["Comunicación y Lingüística"]
+    },
+    {
+      nombre: "Atención Básica de Urgencias",
+      tipo: "Asignatura común de Facultad. Formación de Facultad Interdisciplinarias. Asignatura con Simulación Clínica.",
+      abre: []
+    },
+    {
+      nombre: "Taller de Competencias para el Aprendizaje",
+      tipo: "Asignatura Ciencias Básicas. Formación General.",
+      abre: []
+    },
+    {
+      nombre: "Principios de la Biología",
+      tipo: "Asignatura Ciencias Básicas. Formación Disciplinar en el Curso de Vida. Asignatura con Actividad Práctica.",
+      abre: []
+    },
+    {
+      nombre: "Taller de Competencias Comunicativas",
+      tipo: "Asignatura de Formación General. Formación General.",
+      abre: []
+    }
+  ],
+  "II": [
+    {
+      nombre: "Acústica y Biomecánica",
+      tipo: "Asignatura de Formación Profesional. Formación General. Asignatura con Actividad Práctica.",
+      abre: ["Valoración Auditiva en el Curso de Vida I"],
+      requiere: ["Razonamiento Lógico Matemático"]
+    },
+    {
+      nombre: "Comunicación y Lingüística",
+      tipo: "Asignatura de Formación Profesional. Formación Disciplinar en el Curso de Vida. Asignatura con Actividad Práctica.",
+      abre: ["Significado y Estructuras del Lenguaje"],
+      requiere: ["Introducción a la Fonoaudiología"]
+    }
+    // Agrega más ramos según corresponda
+  ]
+  // Continúa con III al X...
+};
 
-h1 {
-  text-align: center;
-  color: #005a73;
-}
+const mallaDiv = document.getElementById("malla");
 
-.malla {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-}
+Object.keys(data).forEach(sem => {
+  const semDiv = document.createElement("div");
+  semDiv.classList.add("semestre");
 
-.semestre {
-  background-color: #a0dcd7;
-  padding: 1rem;
-  border-radius: 10px;
-  min-width: 200px;
-}
+  const title = document.createElement("h3");
+  title.textContent = `Semestre ${sem}`;
+  semDiv.appendChild(title);
 
-.semestre h3 {
-  text-align: center;
-  margin-bottom: 0.5rem;
-}
+  const ramosDiv = document.createElement("div");
+  ramosDiv.classList.add("ramos");
 
-.ramos {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
+  data[sem].forEach(ramo => {
+    const ramoDiv = document.createElement("div");
+    ramoDiv.classList.add("ramo");
 
-.ramo {
-  width: 150px;
-  height: 90px;
-  perspective: 1000px;
-  cursor: pointer;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
+    // Si tiene requisitos, se deja deshabilitado
+    if (ramo.requiere && ramo.requiere.length > 0) {
+      ramoDiv.classList.add("disabled");
+    }
 
-.ramo.disabled {
-  opacity: 0.3;
-  pointer-events: none;
-}
+    const card = document.createElement("div");
+    card.classList.add("card");
 
-.card {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  background-color: #92cce8;
-  border-radius: 6px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  text-align: center;
-  color: #000;
-  user-select: none;
-}
+    const front = document.createElement("div");
+    front.classList.add("card-front");
+    front.textContent = ramo.nombre;
 
-.ramo:hover .card {
-  transform: rotateY(180deg);
-}
+    const back = document.createElement("div");
+    back.classList.add("card-back");
+    back.textContent = ramo.tipo.replaceAll(";", ".").replaceAll(".", ".\n");
 
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  text-align: center;
-  line-height: 1.3;
-}
+    card.appendChild(front);
+    card.appendChild(back);
+    ramoDiv.appendChild(card);
+    ramosDiv.appendChild(ramoDiv);
 
-.card-back {
-  transform: rotateY(180deg);
-  font-size: 8px;
-  background-color: #92cce8;
-  color: #000;
-  white-space: pre-line;
-}
+    // Guardar referencia
+    ramo.el = ramoDiv;
+    ramo.card = card;
 
-.card.aprobado {
-  background-color: #3a6ea5 !important;
-  color: white !important;
-  box-shadow: 0 0 10px #2b4c73;
-}
+    // Evento de aprobación
+    ramoDiv.addEventListener("click", () => {
+      if (ramoDiv.classList.contains("disabled")) return;
+      card.classList.toggle("aprobado");
+      localStorage.setItem(ramo.nombre, card.classList.contains("aprobado"));
 
-.card.aprobado .card-front {
-  text-decoration: line-through;
-  color: white !important;
-}
+      // Desbloquear ramos que dependen de este
+      Object.values(data).flat().forEach(r => {
+        if (r.requiere && r.requiere.includes(ramo.nombre)) {
+          const requisitosAprobados = r.requiere.every(req => localStorage.getItem(req) === "true");
+          if (requisitosAprobados) r.el.classList.remove("disabled");
+        }
+      });
+    });
 
+    // Restaurar estado
+    const estado = localStorage.getItem(ramo.nombre);
+    if (estado === "true") {
+      card.classList.add("aprobado");
+      if (ramo.abre) {
+        ramo.abre.forEach(nombre => {
+          Object.values(data).flat().forEach(r => {
+            if (r.nombre === nombre && r.el) {
+              r.el.classList.remove("disabled");
+            }
+          });
+        });
+      }
+    }
+  });
+
+  semDiv.appendChild(ramosDiv);
+  mallaDiv.appendChild(semDiv);
+});
