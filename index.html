@@ -20,7 +20,7 @@
     }
 
     .anio {
-      background-color: #a0dcd7; /* 2 tonos más oscuros que el fondo */
+      background-color: #a0dcd7;
       padding: 1rem;
       border-radius: 10px;
     }
@@ -31,7 +31,7 @@
     }
 
     .semestre {
-      background-color: #7bc9c4; /* más oscuro que año */
+      background-color: #7bc9c4;
       padding: 0.5rem;
       margin-bottom: 1rem;
       border-radius: 8px;
@@ -65,7 +65,7 @@
     }
 
     .ramo:hover .card {
-      transform: rotateY(180deg) scale(1.05);
+      transform: rotateY(180deg);
     }
 
     .card-front, .card-back {
@@ -80,7 +80,7 @@
       padding: 0.5rem;
       text-align: center;
       box-shadow: 0 0 8px rgba(0,0,0,0.1);
-      background-color: #92cce8; /* color base de ramos */
+      background-color: #92cce8;
     }
 
     .card-back {
@@ -88,7 +88,7 @@
     }
 
     .card.aprobado {
-      background-color: #4a87b8 !important; /* azul más oscuro */
+      background-color: #4a87b8 !important;
     }
 
     .card.aprobado .card-front,
@@ -101,54 +101,95 @@
 <body>
   <h1 style="text-align:center;">Malla Interactiva Fonoaudiología UST</h1>
   <div class="malla">
-    <!-- PRIMER AÑO -->
-  <div class="anio">
-  <h2>Primer Año</h2>
 
-  <!-- Semestre I -->
-  <div class="semestre">
-    <h3>I Semestre</h3>
-    <div class="ramos">
-      <div class="ramo" onclick="toggleAprobado(this)">
-        <div class="card">
-          <div class="card-front">Razonamiento Lógico Matemático</div>
-          <div class="card-back">
-            Ciencias Básicas.<br>Formación Disciplinar en el Curso de Vida.
+    <div class="anio">
+      <h2>Primer Año</h2>
+
+      <!-- Semestre I -->
+      <div class="semestre">
+        <h3>I Semestre</h3>
+        <div class="ramos">
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Razonamiento Lógico Matemático</div>
+              <div class="card-back">
+                Ciencias Básicas.<br>Formación Disciplinar en el Curso de Vida.
+              </div>
+            </div>
+          </div>
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Introducción a la Fonoaudiología</div>
+              <div class="card-back">
+                Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.<br>Asignatura con Simulación Clínica.
+              </div>
+            </div>
+          </div>
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Atención Básica de Urgencias</div>
+              <div class="card-back">
+                Asignatura común de Facultad.<br>Formación de Facultad Interdisciplinarias.<br>Asignatura con Simulación Clínica.
+              </div>
+            </div>
+          </div>
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Taller de Competencias para el Aprendizaje</div>
+              <div class="card-back">
+                Asignatura Ciencias Básicas.<br>Formación General.
+              </div>
+            </div>
+          </div>
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Principios de la Biología</div>
+              <div class="card-back">
+                Asignatura Ciencias Básicas.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+              </div>
+            </div>
+          </div>
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Taller de Competencias Comunicativas</div>
+              <div class="card-back">
+                Asignatura de Formación General.<br>Formación General.
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="ramo" onclick="toggleAprobado(this)">
-        <div class="card">
-          <div class="card-front">Introducción a la Fonoaudiología</div>
-          <div class="card-back">
-            Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.<br>Asignatura con Simulación Clínica.
+
+      <!-- Semestre II -->
+      <div class="semestre">
+        <h3>II Semestre</h3>
+        <div class="ramos">
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Acústica y Biomecánica</div>
+              <div class="card-back">
+                Asignatura de Formación Profesional.<br>Formación General.<br>Asignatura con Actividad Práctica.
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="ramo" onclick="toggleAprobado(this)">
-        <div class="card">
-          <div class="card-front">Atención Básica de Urgencias</div>
-          <div class="card-back">
-            Asignatura común de Facultad.<br>Formación de Facultad Interdisciplinarias.<br>Asignatura con Simulación Clínica.
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Comunicación y Lingüística</div>
+              <div class="card-back">
+                Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="ramo" onclick="toggleAprobado(this)">
-        <div class="card">
-          <div class="card-front">Taller de Competencias para el Aprendizaje</div>
-          <div class="card-back">
-            Asignatura Ciencias Básicas.<br>Formación General.
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Procesos Cognitivos y Desarrollo en el Curso de Vida</div>
+              <div class="card-back">
+                Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="ramo" onclick="toggleAprobado(this)">
-        <div class="card">
-          <div class="card-front">Principios de la Biología</div>
-          <div class="card-back">
-            Asignatura Ciencias Básicas.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.
-          </div>
-        </div>
-      </div>
-      <div class="ramo" onclick="toggleAprobado(this)">
-        <div class="card">
-          <div class="card-front">Taller de Competencias Co
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Anatomía y Fisiología General</div>
+              <div class="card-back">
+                Asignatura de Formación Profesional.<br>Formación Disciplinar e
