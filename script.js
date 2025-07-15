@@ -1,71 +1,48 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const ramos = document.querySelectorAll(".ramo");
+// Datos base de ejemplo: puedes reemplazarlos más adelante con los reales por semestre
+const malla = {
+  "I Semestre": [
+    "Razonamiento Lógico Matemático",
+    "Introducción a la Fonoaudiología",
+    "Atención Básica de Urgencias",
+    "Taller de Competencias para el Aprendizaje",
+    "Principios de la Biología",
+    "Taller de Competencias Comunicativas"
+  ]
+};
 
-  function actualizarEstados() {
-    // Mapa semestre => array de ramos aprobados en ese semestre
-    const aprobadosPorSemestre = {};
+// Esta estructura se usará para almacenar el estado de cada ramo
+const estadoRamos = {};
 
-    // Guardar qué ramos están aprobados por semestre
-    ramos.forEach(ramo => {
-      const semestre = ramo.dataset.semestre;
-      if (!aprobadosPorSemestre[semestre]) aprobadosPorSemestre[semestre] = [];
-      if (ramo.classList.contains("aprobado")) {
-        aprobadosPorSemestre[semestre].push(ramo.id);
-      }
-    });
+function crearMalla() {
+  const container = document.querySelector(".malla-container");
 
-    // Para cada ramo, decidir si está activo o no
-    ramos.forEach(ramo => {
-      const semestre = ramo.dataset.semestre;
-      const prereqsRaw = ramo.dataset.prerequisitos || "";
-      const prereqs = prereqsRaw.split(",").map(s => s.trim()).filter(Boolean);
+  Object.entries(malla).forEach(([semestre, ramos]) => {
+    const col = document.createElement("div");
+    col.classList.add("semestre");
 
-      if (ramo.classList.contains("aprobado")) {
-        ramo.classList.remove("inactivo");
-        return; // aprobado siempre activo
-      }
+    const titulo = document.createElement("h3");
+    titulo.textContent = semestre;
+    col.appendChild(titulo);
 
-      if (semestre === "1") {
-        // Primer semestre siempre activo si no está aprobado
-        ramo.classList.remove("inactivo");
-        return;
-      }
+    ramos.forEach((ramo) => {
+      const box = document.createElement("div");
+      box.classList.add("ramo");
+      box.textContent = ramo;
 
-      // Si no tiene prerrequisitos
-      if (prereqs.length === 0) {
-        // Si hay al menos un ramo aprobado en su semestre, activar
-        if (aprobadosPorSemestre[semestre] && aprobadosPorSemestre[semestre].length > 0) {
-          ramo.classList.remove("inactivo");
-        } else {
-          // sino, inactivo
-          ramo.classList.add("inactivo");
-        }
-        return;
-      }
+      box.addEventListener("click", () => {
+        box.classList.toggle("tachado");
+        estadoRamos[ramo] = !estadoRamos[ramo];
 
-      // Si tiene prerrequisitos: activamos solo si TODOS sus prerrequisitos están aprobados
-      const todosAprobados = prereqs.every(id => {
-        const preRamo = document.getElementById(id);
-        return preRamo && preRamo.classList.contains("aprobado");
+        // Aquí podrías activar o desactivar prerrequisitos más adelante
+        console.log(`${ramo}: ${estadoRamos[ramo] ? "Aprobado" : "No aprobado"}`);
       });
 
-      if (todosAprobados) {
-        ramo.classList.remove("inactivo");
-      } else {
-        ramo.classList.add("inactivo");
-      }
+      col.appendChild(box);
+      estadoRamos[ramo] = false; // Estado inicial: no aprobado
     });
-  }
 
-  // Click para marcar/desmarcar aprobado
-  ramos.forEach(ramo => {
-    ramo.addEventListener("click", () => {
-      if (ramo.classList.contains("inactivo")) return; // no hacer nada si inactivo
-      ramo.classList.toggle("aprobado");
-      actualizarEstados();
-    });
+    container.appendChild(col);
   });
+}
 
-  // Inicializar estados
-  actualizarEstados();
-});
+crearMalla();
