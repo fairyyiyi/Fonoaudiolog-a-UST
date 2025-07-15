@@ -79,7 +79,7 @@ const malla = {
   ]
 };
 
-// Prerrequisitos: ramo => [ramos que lo activan]
+// Ramo => [ramos que lo activan]
 const prerrequisitos = {
   "Acústica y Biomecánica": ["Razonamiento Lógico Matemático"],
   "Comunicación y Lingüística": ["Introducción a la Fonoaudiología"],
@@ -116,21 +116,27 @@ function actualizarEstados() {
     const nombre = div.textContent.trim();
     const estaActivo = estadoRamos[nombre];
 
+    const requisitos = prerrequisitos[nombre] || [];
+    const semestre = div.closest(".semestre").querySelector("h3").textContent;
+
     if (estaActivo) {
       div.classList.remove("inactivo");
       div.classList.add("tachado");
     } else {
       div.classList.remove("tachado");
 
-      const requisitos = prerrequisitos[nombre] || [];
-
       const cumplePrerreq = requisitos.every(req => estadoRamos[req]);
       const esSinPrerreq = requisitos.length === 0;
-      const semestre = div.closest(".semestre").querySelector("h3").textContent;
-      const otros = Array.from(div.closest(".semestre").querySelectorAll(".ramo"))
+
+      const otrosActivados = Array.from(div.closest(".semestre").querySelectorAll(".ramo"))
         .filter(r => r !== div && estadoRamos[r.textContent.trim()]);
 
-      const debeEstarInactivo = !cumplePrerreq && !(esSinPrerreq && (semestre === "I Semestre" || otros.length > 0));
+      const debeEstarInactivo = (
+        !cumplePrerreq && (
+          !esSinPrerreq || // tiene prerrequisitos que no se cumplen
+          (semestre !== "I Semestre" && otrosActivados.length === 0) // es sin prerreq pero no hay ninguno activo en su semestre
+        )
+      );
 
       if (debeEstarInactivo) {
         div.classList.add("inactivo");
