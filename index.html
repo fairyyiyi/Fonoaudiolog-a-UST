@@ -4,328 +4,260 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Malla Curricular Fonoaudiología UST</title>
-  <style>
-    /* Aquí pega el CSS que te mandé antes */
-    body {
-      margin: 0;
-      padding: 1rem;
-      background-color: #f9e6f7; /* rosa pastel muy suave */
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      color: #3a2e4d;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    .malla {
-      display: flex;
-      flex-wrap: nowrap; /* todos en fila horizontal */
-      gap: 12px;
-      overflow-x: auto;
-      padding: 0 20px 10px 20px;
-      scrollbar-width: thin;
-      scroll-padding-inline: 20px;
-    }
-
-    .semestre {
-      background: linear-gradient(135deg, #f3d9f4, #caa2d6); /* degradado rosa morado pastel */
-      border-radius: 12px;
-      padding: 8px 5px;
-      min-width: 130px;
-      max-width: 130px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 0 10px rgba(202, 162, 214, 0.5);
-      user-select: none;
-    }
-
-    .semestre h3 {
-      margin: 0 0 8px 0;
-      font-weight: 600;
-      font-size: 13px;
-      color: #52275a;
-    }
-
-    .ramos {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      width: 100%;
-    }
-
-    .ramo {
-      background: linear-gradient(145deg, #fbeaff, #d8b0d4); /* rosa pastel */
-      border-radius: 8px;
-      padding: 8px 6px;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 0 6px rgba(232, 185, 237, 0.7);
-      min-height: 65px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: #4a2a5a;
-      transition: background-color 0.3s, box-shadow 0.3s, opacity 0.3s;
-      line-height: 1.2;
-      position: relative;
-    }
-
-    .ramo:hover:not(.inactivo):not(.aprobado) {
-      background: linear-gradient(145deg, #eac8f2, #bb90c8);
-      box-shadow: 0 0 12px rgba(184, 134, 211, 0.9);
-    }
-
-    .ramo.inactivo {
-      opacity: 0.4;
-      pointer-events: none;
-      cursor: default;
-      box-shadow: none;
-      background: #f4e9f6;
-      color: #9a7fa8;
-    }
-
-    .ramo.aprobado {
-      background: linear-gradient(145deg, #bca1d4, #8a75b7); /* morado pastel */
-      box-shadow: 0 0 12px #a688c6;
-      color: white;
-      text-decoration: line-through;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <h1>Malla Curricular Fonoaudiología UST</h1>
-  <div class="malla"></div>
 
-  <script>
-    // Aquí pega el JS que te mandé antes
-    // Define los semestres con sus ramos y prerrequisitos (abre)
-    const semestres = [
-      {
-        nombre: "I Semestre",
-        ramos: [
-          { id: "r1", nombre: "Razonamiento Lógico Matemático", abre: ["r7", "r9"] },
-          { id: "r2", nombre: "Introducción a la Fonoaudiología", abre: ["r8"] },
-          { id: "r3", nombre: "Atención Básica de Urgencias", abre: [] },
-          { id: "r4", nombre: "Taller de Competencias para el Aprendizaje", abre: [] },
-          { id: "r5", nombre: "Principios de la Biología", abre: [] },
-          { id: "r6", nombre: "Taller de Competencias Comunicativas", abre: [] },
-        ],
-      },
-      {
-        nombre: "II Semestre",
-        ramos: [
-          { id: "r7", nombre: "Acústica y Biomecánica", abre: ["r13"] },
-          { id: "r8", nombre: "Comunicación y Lingüística", abre: ["r14"] },
-          { id: "r9", nombre: "Procesos Cognitivos y Desarrollo en el Curso de Vida", abre: ["r15"] },
-          { id: "r10", nombre: "Anatomía y Fisiología General", abre: ["r16"] },
-          { id: "r11", nombre: "Salud y Sociedad", abre: ["r18"] },
-          { id: "r12", nombre: "Cultura y Valores", abre: [] },
-        ],
-      },
-      {
-        nombre: "III Semestre",
-        ramos: [
-          { id: "r13", nombre: "Estadística y Epidemiología en Fonoaudiología", abre: ["r20"] },
-          { id: "r14", nombre: "Significado y Estructuras del Lenguaje", abre: ["r21"] },
-          { id: "r15", nombre: "Neuropsiquiatría", abre: ["r22"] },
-          { id: "r16", nombre: "Bases Morfofuncionales de la Fonoaudiología", abre: ["r23", "r24"] },
-          { id: "r17", nombre: "Personas y Sentido", abre: [] },
-          { id: "r18", nombre: "Taller de Desarrollo Personal I", abre: [] },
-          { id: "r19", nombre: "Inglés Básico I", abre: [] },
-        ],
-      },
-      {
-        nombre: "IV Semestre",
-        ramos: [
-          { id: "r20", nombre: "Evaluación del Desarrollo de Competencias MEC FON HITO 1", abre: [] },
-          { id: "r21", nombre: "Lenguaje y Sociedad", abre: ["r25", "r26"] },
-          { id: "r22", nombre: "Fonoestamología", abre: ["r27"] },
-          { id: "r23", nombre: "Fisiopatología de la Comunicación", abre: [] },
-          { id: "r24", nombre: "Evaluación Participativa con la Comunidad", abre: ["r28"] },
-          { id: "r25", nombre: "Taller de Desarrollo Personal II", abre: [] },
-          { id: "r26", nombre: "Inglés Básico II", abre: [] },
-        ],
-      },
-      {
-        nombre: "V Semestre",
-        ramos: [
-          { id: "r27", nombre: "Valoración Auditiva en el Curso de Vida I", abre: ["r29"] },
-          { id: "r28", nombre: "Desarrollo en Niños, Niñas y Adolescentes I", abre: ["r30"] },
-          { id: "r29", nombre: "Desarrollo en el Adulto y Personas Mayores", abre: ["r31"] },
-          { id: "r30", nombre: "Abordaje Fonoaudiológico en la Comunicación Educativa", abre: [] },
-          { id: "r31", nombre: "Intervención Comunitaria", abre: [] },
-          { id: "r32", nombre: "Ética y Salud", abre: [] },
-        ],
-      },
-      {
-        nombre: "VI Semestre",
-        ramos: [
-          { id: "r33", nombre: "Gestión e Innovación en Fonoaudiología", abre: ["r34"] },
-          { id: "r34", nombre: "Abordaje en Niños, Niñas y Adolescentes I", abre: ["r35"] },
-          { id: "r35", nombre: "Abordaje en Adultos y Personas Mayores I", abre: ["r36"] },
-          { id: "r36", nombre: "Bases de la Rehabilitación y Redes Integradas de Servicio de Salud", abre: [] },
-          { id: "r37", nombre: "Valoración Auditiva en el Curso de Vida II", abre: ["r38"] },
-          { id: "r38", nombre: "Desarrollo de la Voz y Técnica Vocal", abre: ["r39"] },
-          { id: "r39", nombre: "Electivo I", abre: [] },
-        ],
-      },
-      {
-        nombre: "VII Semestre",
-        ramos: [
-          { id: "r40", nombre: "Abordaje en Niños, Niñas y Adolescentes II", abre: ["r41"] },
-          { id: "r41", nombre: "Abordaje en Adultos y Personas Mayores II", abre: ["r42"] },
-          { id: "r42", nombre: "Electivo II", abre: [] },
-          { id: "r43", nombre: "Abordaje Auditivo en el Curso de Vida", abre: ["r44"] },
-          { id: "r44", nombre: "Abordaje de la Voz Hablada y Cantada I", abre: ["r45"] },
-          { id: "r45", nombre: "Práctica Curricular I", abre: ["r46"] },
-        ],
-      },
-      {
-        nombre: "VIII Semestre",
-        ramos: [
-          { id: "r46", nombre: "Metodología de la Investigación", abre: ["r47"] },
-          { id: "r47", nombre: "Abordaje de la Deglución y Alimentación Oral", abre: [] },
-          { id: "r48", nombre: "Electivo III", abre: [] },
-          { id: "r49", nombre: "Evaluación del Desarrollo de Competencias MEC FON HITO 2", abre: [] },
-          { id: "r50", nombre: "Abordaje Vesicular en el Curso de Vida", abre: [] },
-          { id: "r51", nombre: "Abordaje de la Voz Hablada y Cantada II", abre: [] },
-          { id: "r52", nombre: "Práctica Curricular II", abre: [] },
-        ],
-      },
-      {
-        nombre: "IX Semestre",
-        ramos: [
-          { id: "r53", nombre: "Seminario de Grado I", abre: ["r54"] },
-          { id: "r54", nombre: "Internado Profesional I", abre: [] },
-          { id: "r55", nombre: "Internado Profesional II", abre: [] },
-        ],
-      },
-      {
-        nombre: "X Semestre",
-        ramos: [
-          { id: "r56", nombre: "Seminario de Grado II", abre: [] },
-          { id: "r57", nombre: "Internado III", abre: [] },
-          { id: "r58", nombre: "Internado IV", abre: [] },
-        ],
-      },
-    ];
+  <div class="malla">
 
-    const aprobados = {};
+    <!-- I Semestre -->
+    <div class="anio">
+      <h2>I</h2>
+      <div class="semestre">
+        <div class="ramo primer-semestre" id="r1" data-prerequisitos="" data-semestre="1">
+          Razonamiento Lógico Matemático
+        </div>
+        <div class="ramo primer-semestre" id="r2" data-prerequisitos="" data-semestre="1">
+          Introducción a la Fonoaudiología
+        </div>
+        <div class="ramo primer-semestre" id="r3" data-prerequisitos="" data-semestre="1">
+          Atención Básica de Urgencias
+        </div>
+        <div class="ramo primer-semestre" id="r4" data-prerequisitos="" data-semestre="1">
+          Taller de Competencias para el Aprendizaje
+        </div>
+        <div class="ramo primer-semestre" id="r5" data-prerequisitos="" data-semestre="1">
+          Principios de la Biología
+        </div>
+        <div class="ramo primer-semestre" id="r6" data-prerequisitos="" data-semestre="1">
+          Taller de Competencias Comunicativas
+        </div>
+      </div>
+    </div>
 
-    function renderizarMalla() {
-      const container = document.querySelector(".malla");
-      container.innerHTML = "";
+    <!-- II Semestre -->
+    <div class="anio">
+      <h2>II</h2>
+      <div class="semestre">
+        <div class="ramo" id="r7" data-prerequisitos="r1" data-semestre="2">
+          Acústica y Biomecánica
+        </div>
+        <div class="ramo" id="r8" data-prerequisitos="r2" data-semestre="2">
+          Comunicación y Lingüística
+        </div>
+        <div class="ramo" id="r9" data-prerequisitos="" data-semestre="2">
+          Procesos Cognitivos y Desarrollo en el Curso de Vida
+        </div>
+        <div class="ramo" id="r10" data-prerequisitos="" data-semestre="2">
+          Anatomía y Fisiología General
+        </div>
+        <div class="ramo" id="r11" data-prerequisitos="" data-semestre="2">
+          Salud y Sociedad
+        </div>
+        <div class="ramo" id="r12" data-prerequisitos="" data-semestre="2">
+          Cultura y Valores
+        </div>
+      </div>
+    </div>
 
-      semestres.forEach(semestre => {
-        const semestreDiv = document.createElement("div");
-        semestreDiv.classList.add("semestre");
+    <!-- III Semestre -->
+    <div class="anio">
+      <h2>III</h2>
+      <div class="semestre">
+        <div class="ramo" id="r13" data-prerequisitos="r7,r11" data-semestre="3">
+          Estadística y Epidemiología en Fonoaudiología
+        </div>
+        <div class="ramo" id="r14" data-prerequisitos="r8" data-semestre="3">
+          Significado y Estructuras del Lenguaje
+        </div>
+        <div class="ramo" id="r15" data-prerequisitos="r9" data-semestre="3">
+          Neuropsiquiatría
+        </div>
+        <div class="ramo" id="r16" data-prerequisitos="r10" data-semestre="3">
+          Bases Morfofuncionales de la Fonoaudiología
+        </div>
+        <div class="ramo" id="r17" data-prerequisitos="" data-semestre="3">
+          Personas y Sentido
+        </div>
+        <div class="ramo" id="r18" data-prerequisitos="" data-semestre="3">
+          Taller de Desarrollo Personal I
+        </div>
+        <div class="ramo" id="r19" data-prerequisitos="" data-semestre="3">
+          Inglés Básico I
+        </div>
+      </div>
+    </div>
 
-        const titulo = document.createElement("h3");
-        titulo.textContent = semestre.nombre;
-        semestreDiv.appendChild(titulo);
+    <!-- IV Semestre -->
+    <div class="anio">
+      <h2>IV</h2>
+      <div class="semestre">
+        <div class="ramo" id="r20" data-prerequisitos="" data-semestre="4">
+          Evaluación del Desarrollo de Competencias MEC FON HITO 1
+        </div>
+        <div class="ramo" id="r21" data-prerequisitos="r14" data-semestre="4">
+          Lenguaje y Sociedad
+        </div>
+        <div class="ramo" id="r22" data-prerequisitos="r16" data-semestre="4">
+          Fonoestamología
+        </div>
+        <div class="ramo" id="r23" data-prerequisitos="" data-semestre="4">
+          Fisiopatología de la Comunicación
+        </div>
+        <div class="ramo" id="r24" data-prerequisitos="r11" data-semestre="4">
+          Evaluación Participativa con la Comunidad
+        </div>
+        <div class="ramo" id="r25" data-prerequisitos="" data-semestre="4">
+          Taller de Desarrollo Personal II
+        </div>
+        <div class="ramo" id="r26" data-prerequisitos="" data-semestre="4">
+          Inglés Básico II
+        </div>
+      </div>
+    </div>
 
-        const ramosDiv = document.createElement("div");
-        ramosDiv.classList.add("ramos");
+    <!-- V Semestre -->
+    <div class="anio">
+      <h2>V</h2>
+      <div class="semestre">
+        <div class="ramo" id="r27" data-prerequisitos="r13" data-semestre="5">
+          Valoración Auditiva en el Curso de Vida I
+        </div>
+        <div class="ramo" id="r28" data-prerequisitos="r21" data-semestre="5">
+          Desarrollo en Niños, Niñas y Adolescentes I
+        </div>
+        <div class="ramo" id="r29" data-prerequisitos="r15" data-semestre="5">
+          Desarrollo en el Adulto y Personas Mayores
+        </div>
+        <div class="ramo" id="r30" data-prerequisitos="" data-semestre="5">
+          Abordaje Fonoaudiológico en la Comunicación Educativa
+        </div>
+        <div class="ramo" id="r31" data-prerequisitos="" data-semestre="5">
+          Intervención Comunitaria
+        </div>
+        <div class="ramo" id="r32" data-prerequisitos="" data-semestre="5">
+          Ética y Salud
+        </div>
+      </div>
+    </div>
 
-        semestre.ramos.forEach(ramo => {
-          const ramoDiv = document.createElement("div");
-          ramoDiv.classList.add("ramo");
-          ramoDiv.id = ramo.id;
-          ramoDiv.textContent = ramo.nombre;
-          ramosDiv.appendChild(ramoDiv);
-        });
+    <!-- VI Semestre -->
+    <div class="anio">
+      <h2>VI</h2>
+      <div class="semestre">
+        <div class="ramo" id="r33" data-prerequisitos="r20" data-semestre="6">
+          Gestión e Innovación en Fonoaudiología
+        </div>
+        <div class="ramo" id="r34" data-prerequisitos="r28" data-semestre="6">
+          Abordaje en Niños, Niñas y Adolescentes I
+        </div>
+        <div class="ramo" id="r35" data-prerequisitos="r29" data-semestre="6">
+          Abordaje en Adultos y Personas Mayores I
+        </div>
+        <div class="ramo" id="r36" data-prerequisitos="" data-semestre="6">
+          Bases de la Rehabilitación y Redes Integradas de Servicio de Salud
+        </div>
+        <div class="ramo" id="r37" data-prerequisitos="r27" data-semestre="6">
+          Valoración Auditiva en el Curso de Vida II
+        </div>
+        <div class="ramo" id="r38" data-prerequisitos="r22" data-semestre="6">
+          Desarrollo de la Voz y Técnica Vocal
+        </div>
+        <div class="ramo" id="r39" data-prerequisitos="" data-semestre="6">
+          Electivo I
+        </div>
+      </div>
+    </div>
 
-        semestreDiv.appendChild(ramosDiv);
-        container.appendChild(semestreDiv);
-      });
-    }
+    <!-- VII Semestre -->
+    <div class="anio">
+      <h2>VII</h2>
+      <div class="semestre">
+        <div class="ramo" id="r40" data-prerequisitos="r34" data-semestre="7">
+          Abordaje en Niños, Niñas y Adolescentes II
+        </div>
+        <div class="ramo" id="r41" data-prerequisitos="r35" data-semestre="7">
+          Abordaje en Adultos y Personas Mayores II
+        </div>
+        <div class="ramo" id="r42" data-prerequisitos="" data-semestre="7">
+          Electivo II
+        </div>
+        <div class="ramo" id="r43" data-prerequisitos="r37" data-semestre="7">
+          Abordaje Auditivo en el Curso de Vida
+        </div>
+        <div class="ramo" id="r44" data-prerequisitos="r38" data-semestre="7">
+          Abordaje de la Voz Hablada y Cantada I
+        </div>
+        <div class="ramo" id="r45" data-prerequisitos="r46" data-semestre="7">
+          Práctica Curricular I
+        </div>
+      </div>
+    </div>
 
-    function actualizarActivacion() {
-      semestres.forEach((semestre, i) => {
-        semestre.ramos.forEach(ramo => {
-          const el = document.getElementById(ramo.id);
-          if (i === 0) {
-            el.classList.remove("inactivo");
-          } else {
-            el.classList.add("inactivo");
-          }
-          // Quitar aprobado visual para refrescar (se actualiza en el click)
-          // No tocamos aquí aprobado, solo activacion
-        });
-      });
+    <!-- VIII Semestre -->
+    <div class="anio">
+      <h2>VIII</h2>
+      <div class="semestre">
+        <div class="ramo" id="r46" data-prerequisitos="r33" data-semestre="8">
+          Metodología de la Investigación
+        </div>
+        <div class="ramo" id="r47" data-prerequisitos="" data-semestre="8">
+          Abordaje de la Deglución y Alimentación Oral
+        </div>
+        <div class="ramo" id="r48" data-prerequisitos="" data-semestre="8">
+          Electivo III
+        </div>
+        <div class="ramo" id="r49" data-prerequisitos="" data-semestre="8">
+          Evaluación del Desarrollo de Competencias MEC FON HITO 2
+        </div>
+        <div class="ramo" id="r50" data-prerequisitos="" data-semestre="8">
+          Abordaje Vesicular en el Curso de Vida
+        </div>
+        <div class="ramo" id="r51" data-prerequisitos="" data-semestre="8">
+          Abordaje de la Voz Hablada y Cantada II
+        </div>
+        <div class="ramo" id="r52" data-prerequisitos="" data-semestre="8">
+          Práctica Curricular II
+        </div>
+      </div>
+    </div>
 
-      Object.keys(aprobados).forEach(idAprobado => {
-        if (!aprobados[idAprobado]) return;
+    <!-- IX Semestre -->
+    <div class="anio">
+      <h2>IX</h2>
+      <div class="semestre">
+        <div class="ramo" id="r53" data-prerequisitos="r46" data-semestre="9">
+          Seminario de Grado I
+        </div>
+        <div class="ramo" id="r54" data-prerequisitos="" data-semestre="9">
+          Internado Profesional I
+        </div>
+        <div class="ramo" id="r55" data-prerequisitos="" data-semestre="9">
+          Internado Profesional II
+        </div>
+      </div>
+    </div>
 
-        const ramoAprobado = semestres
-          .flatMap(s => s.ramos)
-          .find(r => r.id === idAprobado);
+    <!-- X Semestre -->
+    <div class="anio">
+      <h2>X</h2>
+      <div class="semestre">
+        <div class="ramo" id="r56" data-prerequisitos="" data-semestre="10">
+          Seminario de Grado II
+        </div>
+        <div class="ramo" id="r57" data-prerequisitos="" data-semestre="10">
+          Internado III
+        </div>
+        <div class="ramo" id="r58" data-prerequisitos="" data-semestre="10">
+          Internado IV
+        </div>
+      </div>
+    </div>
 
-        if (ramoAprobado && ramoAprobado.abre.length > 0) {
-          ramoAprobado.abre.forEach(idAbre => {
-            const elAbre = document.getElementById(idAbre);
-            if (elAbre) {
-              elAbre.classList.remove("inactivo");
-            }
-          });
-        }
-      });
+  </div>
 
-      semestres.forEach((semestre, i) => {
-        if (i === 0) return;
-
-        const algunoActivo = semestre.ramos.some(ramo => {
-          const el = document.getElementById(ramo.id);
-          return !el.classList.contains("inactivo");
-        });
-
-        if (algunoActivo) {
-          semestre.ramos.forEach(ramo => {
-            const el = document.getElementById(ramo.id);
-            if (ramo.abre.length === 0) {
-              el.classList.remove("inactivo");
-            }
-          });
-        }
-      });
-    }
-
-    function onClickRamo(event) {
-      const ramoId = event.currentTarget.id;
-      const ramoEl = event.currentTarget;
-
-      if (ramoEl.classList.contains("inactivo")) return;
-
-      const aprobado = aprobados[ramoId];
-      if (aprobado) {
-        aprobados[ramoId] = false;
-        ramoEl.classList.remove("aprobado");
-      } else {
-        aprobados[ramoId] = true;
-        ramoEl.classList.add("aprobado");
-      }
-
-      actualizarActivacion();
-    }
-
-    function init() {
-      renderizarMalla();
-      actualizarActivacion();
-
-      semestres.forEach(semestre => {
-        semestre.ramos.forEach(ramo => {
-          const el = document.getElementById(ramo.id);
-          el.addEventListener("click", onClickRamo);
-        });
-      });
-    }
-
-    window.onload = init;
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
