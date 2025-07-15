@@ -11,6 +11,13 @@
       background-color: #d0f0ec; /* Turquesa pastel */
       font-family: 'Inter', sans-serif;
       font-size: 12px;
+      color: #000;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #054a60;
     }
 
     .malla {
@@ -23,18 +30,24 @@
       background-color: #a0dcd7;
       padding: 1rem;
       border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      max-height: 95vh;
+      overflow-y: auto;
     }
 
     .anio h2 {
       text-align: center;
       margin-bottom: 1rem;
+      color: #034547;
     }
 
     .semestres {
       display: flex;
       gap: 1rem;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: center;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
     }
 
     .semestre {
@@ -42,11 +55,19 @@
       padding: 0.5rem;
       border-radius: 8px;
       min-width: 260px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     .semestre h3 {
       text-align: center;
       margin-bottom: 0.5rem;
+      color: #043c3a;
+      font-weight: 600;
     }
 
     .ramos {
@@ -99,12 +120,17 @@
       text-align: center;
     }
 
+    .card-front {
+      font-weight: 600;
+    }
+
     .card-back {
       transform: rotateY(180deg);
       font-size: 8px;
       background-color: #92cce8;
       color: #000;
       line-height: 1.3;
+      overflow-y: auto;
     }
 
     .card.aprobado {
@@ -118,19 +144,27 @@
       text-decoration: line-through;
       color: white !important;
     }
+
+    /* Scrollbar styling for overflow-y scrolls */
+    .anio::-webkit-scrollbar, .semestre::-webkit-scrollbar, .card-back::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .anio::-webkit-scrollbar-thumb, .semestre::-webkit-scrollbar-thumb, .card-back::-webkit-scrollbar-thumb {
+      background-color: rgba(0,0,0,0.1);
+      border-radius: 3px;
+    }
+
   </style>
 </head>
 <body>
-  <h1 style="text-align:center;">Malla Interactiva Fonoaudiología UST</h1>
+  <h1>Malla Interactiva Fonoaudiología UST</h1>
 
   <div class="malla">
-
-    <!-- PRIMER AÑO -->
+    <!-- Primer Año -->
     <div class="anio">
       <h2>Primer Año</h2>
       <div class="semestres">
-
-        <!-- I Semestre -->
         <div class="semestre">
           <h3>I Semestre</h3>
           <div class="ramos">
@@ -138,7 +172,10 @@
               <div class="card">
                 <div class="card-front">Razonamiento Lógico Matemático</div>
                 <div class="card-back">
-                  Ciencias Básicas.<br>Formación Disciplinar en el Curso de Vida.
+                  Abre Acústica y Biomecánica.<br>
+                  Abre Estadística y Epidemiología en Fonoaudiología.<br><br>
+                  Asignatura Ciencias Básicas.<br>
+                  Formación Disciplinar en el Curso de Vida.
                 </div>
               </div>
             </div>
@@ -147,7 +184,11 @@
               <div class="card">
                 <div class="card-front">Introducción a la Fonoaudiología</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.<br>Asignatura con Simulación Clínica.
+                  Abre Comunicación y Lingüística.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Disciplinar en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Simulación Clínica.
                 </div>
               </div>
             </div>
@@ -156,7 +197,10 @@
               <div class="card">
                 <div class="card-front">Atención Básica de Urgencias</div>
                 <div class="card-back">
-                  Asignatura común de Facultad.<br>Formación de Facultad Interdisciplinarias.<br>Asignatura con Simulación Clínica.
+                  No abre nada.<br><br>
+                  Asignatura común de Facultad.<br>
+                  Formación de Facultad Interdisciplinarias.<br>
+                  Asignatura con Simulación Clínica.
                 </div>
               </div>
             </div>
@@ -165,7 +209,9 @@
               <div class="card">
                 <div class="card-front">Taller de Competencias para el Aprendizaje</div>
                 <div class="card-back">
-                  Asignatura Ciencias Básicas.<br>Formación General.
+                  No abre nada.<br><br>
+                  Asignatura Ciencias Básicas.<br>
+                  Formación General.
                 </div>
               </div>
             </div>
@@ -174,7 +220,10 @@
               <div class="card">
                 <div class="card-front">Principios de la Biología</div>
                 <div class="card-back">
-                  Asignatura Ciencias Básicas.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+                  No abre nada.<br><br>
+                  Asignatura Ciencias Básicas.<br>
+                  Formación Disciplinar en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.
                 </div>
               </div>
             </div>
@@ -183,14 +232,15 @@
               <div class="card">
                 <div class="card-front">Taller de Competencias Comunicativas</div>
                 <div class="card-back">
-                  Asignatura de Formación General.<br>Formación General.
+                  No abre nada.<br><br>
+                  Asignatura de Formación General.<br>
+                  Formación General.
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- II Semestre -->
         <div class="semestre">
           <h3>II Semestre</h3>
           <div class="ramos">
@@ -198,7 +248,10 @@
               <div class="card">
                 <div class="card-front">Acústica y Biomecánica</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación General.<br>Asignatura con Actividad Práctica.
+                  Abre Valoración Auditiva en el Curso de Vida I.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación General.<br>
+                  Asignatura con Actividad Práctica.
                 </div>
               </div>
             </div>
@@ -207,7 +260,10 @@
               <div class="card">
                 <div class="card-front">Comunicación y Lingüística</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+                  Abre Significado y Estructuras del Lenguaje.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Disciplinar en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.
                 </div>
               </div>
             </div>
@@ -216,7 +272,9 @@
               <div class="card">
                 <div class="card-front">Procesos Cognitivos y Desarrollo en el Curso de Vida</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.
+                  Abre Neuropsiquiatría.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Disciplinar en el Curso de Vida.
                 </div>
               </div>
             </div>
@@ -225,7 +283,10 @@
               <div class="card">
                 <div class="card-front">Anatomía y Fisiología General</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+                  Abre Bases Morfofuncionales de la Fonoaudiología.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Disciplinar en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.
                 </div>
               </div>
             </div>
@@ -234,7 +295,9 @@
               <div class="card">
                 <div class="card-front">Salud y Sociedad</div>
                 <div class="card-back">
-                  Asignatura común de Facultad.<br>Formación de Facultad Interdisciplinarias.
+                  Abre Evaluación Participativa con la Comunidad.<br><br>
+                  Asignatura común de Facultad.<br>
+                  Formación de Facultad Interdisciplinarias.
                 </div>
               </div>
             </div>
@@ -243,22 +306,21 @@
               <div class="card">
                 <div class="card-front">Cultura y Valores</div>
                 <div class="card-back">
-                  Asignatura de Formación General.<br>Formación General.
+                  No abre nada.<br><br>
+                  Asignatura de Formación General.<br>
+                  Formación General.
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
-    <!-- SEGUNDO AÑO -->
+    <!-- Segundo Año -->
     <div class="anio">
       <h2>Segundo Año</h2>
       <div class="semestres">
-
-        <!-- III Semestre -->
         <div class="semestre">
           <h3>III Semestre</h3>
           <div class="ramos">
@@ -266,62 +328,85 @@
               <div class="card">
                 <div class="card-front">Estadística y Epidemiología en Fonoaudiología</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+                  Abre Valoración Auditiva en el Curso de Vida I.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Disciplinar en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Significado y Estructuras del Lenguaje</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+                  Abre Lenguaje y Sociedad.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Disciplinar en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Neuropsiquiatría</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.
+                  Abre Desarrollo en el Adulto y Personas Mayores.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Disciplinar en el Curso de Vida.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Bases Morfofuncionales de la Fonoaudiología</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+                  Abre Fonoestomatología.<br>
+                  Abre Fisiopatología de la Comunicación.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Disciplinar en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Personas y Sentido</div>
                 <div class="card-back">
-                  Asignatura de Formación General.<br>Formación General.
+                  No abre nada.<br><br>
+                  Asignatura de Formación General.<br>
+                  Formación General.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Taller de Desarrollo Personal I</div>
                 <div class="card-back">
-                  Asignatura de Formación General.<br>Formación General.
+                  No abre nada.<br><br>
+                  Asignatura de Formación General.<br>
+                  Formación General.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Inglés Básico I</div>
                 <div class="card-back">
-                  Asignatura de Formación General.<br>Formación General.
+                  No abre nada.<br><br>
+                  Asignatura de Formación General.<br>
+                  Formación General.
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- IV Semestre -->
+  
         <div class="semestre">
           <h3>IV Semestre</h3>
           <div class="ramos">
@@ -329,70 +414,91 @@
               <div class="card">
                 <div class="card-front">Evaluación del Desarrollo de Competencias MEC FON HITO 1</div>
                 <div class="card-back">
+                  No abre nada.<br><br>
                   Asignatura de Formación Profesional.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Lenguaje y Sociedad</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+                  Abre Desarrollo en Niños, Niñas y Adolescentes.<br>
+                  Abre Abordaje Fonoaudiológico en la Comunidad Educativa.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Disciplinar en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Fonoestamología</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+                  Abre Desarrollo de la Voz y Técnica Vocal.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Fisiopatología de la Comunicación</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Disciplinar en el Curso de Vida.
+                  No abre nada.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Disciplinar en el Curso de Vida.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Evaluación Participativa con la Comunidad</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.<br>Asignatura con Simulación Clínica.<br>Asignatura con Centro de Práctica / Campo Profesional.<br>Asignatura con Aprendizaje más Servicio.
+                  Abre Intervención Comunicativa.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Simulación Clínica.<br>
+                  Asignatura con Centro de Práctica / Campo Profesional.<br>
+                  Asignatura con Aprendizaje más Servicio.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Taller de Desarrollo Personal II</div>
                 <div class="card-back">
-                  Asignatura de Formación General.<br>Formación General.
+                  Asignatura de Formación General.<br>
+                  Formación General.
                 </div>
               </div>
             </div>
+  
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Inglés Básico II</div>
                 <div class="card-back">
-                  Asignatura de Formación General.<br>Formación General.
+                  No abre nada.<br><br>
+                  Asignatura de Formación General.<br>
+                  Formación General.
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
-    <!-- TERCER AÑO -->
+    <!-- Tercer Año -->
     <div class="anio">
       <h2>Tercer Año</h2>
       <div class="semestres">
-
-        <!-- V Semestre -->
         <div class="semestre">
           <h3>V Semestre</h3>
           <div class="ramos">
@@ -400,54 +506,77 @@
               <div class="card">
                 <div class="card-front">Valoración Auditiva en el Curso de Vida I</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.<br>Asignatura con Actividad Práctica.<br>Asignatura con Simulación Clínica.
+                  Abre Valoración Auditiva en el Curso de Vida II.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Simulación Clínica.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Desarrollo en Niños, Niñas y Adolescentes I</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.
+                  Abre Abordaje en Niños, Niñas y Adolescentes I.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Desarrollo en el Adulto y Personas Mayores</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.
+                  Abre Abordaje en Adultos y Personas Mayores I.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Abordaje Fonoaudiológico en la Comunicación Educativa</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+                  Bases de la Rehabilitación y Redes Integradas de Servicio de Salud.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Intervención Comunitaria</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.<br>Asignatura con Actividad Práctica.<br>Asignatura con Simulación Clínica.<br>Asignatura con Centro de Práctica / Campo Profesional.<br>Asignatura con Aprendizaje más Servicio.
+                  No abre nada.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Simulación Clínica.<br>
+                  Asignatura con Centro de Práctica / Campo Profesional.<br>
+                  Asignatura con Aprendizaje más Servicio.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Ética y Salud</div>
                 <div class="card-back">
-                  Asignatura común de Facultad.<br>Formación de Facultad Interdisciplinarias.
+                  No abre nada.<br><br>
+                  Asignatura común de Facultad.<br>
+                  Formación de Facultad Interdisciplinarias.
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- VI Semestre -->
         <div class="semestre">
           <h3>VI Semestre</h3>
           <div class="ramos">
@@ -455,70 +584,93 @@
               <div class="card">
                 <div class="card-front">Gestión e Innovación en Fonoaudiología</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación en Investigación Gestión, Innovación y Liderazgo.
+                  Abre Metodología de la Investigación.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación en Investigación Gestión, Innovación y Liderazgo.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Abordaje en Niños, Niñas y Adolescentes I</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.<br>Asignatura con Actividad Práctica.<br>Asignatura con Simulación Clínica.
+                  Abre Abordaje en Niños, Niñas y Adolescentes II.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Simulación Clínica.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Abordaje en Adultos y Personas Mayores I</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.<br>Asignatura con Actividad Práctica.<br>Asignatura con Simulación Clínica.
+                  Abre Abordaje en Adultos y Personas Mayores II.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Simulación Clínica.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Bases de la Rehabilitación y Redes Integradas de Servicio de Salud</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación en Investigación Gestión, Innovación y Liderazgo.
+                  No abre nada.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación en Investigación Gestión, Innovación y Liderazgo.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Valoración Auditiva en el Curso de Vida II</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.<br>Asignatura con Actividad Práctica.<br>Asignatura con Simulación Clínica.
+                  Abre Abordaje de la Voz Hablada y Cantada I.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Simulación Clínica.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Desarrollo de la Voz y Técnica Vocal</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.<br>Asignatura con Actividad Práctica.
+                  Abre Abordaje de la Voz Hablada y Cantada I.<br><br>
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Electivo I</div>
                 <div class="card-back">
-                  Asignatura Electiva.<br>Asignaturas Electivas Articulables con Postgrado.
+                  Asignatura Electiva.<br>
+                  Asignaturas Electivas Articulables con Postgrado.
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
-    <!-- CUARTO AÑO -->
+    <!-- Cuarto Año -->
     <div class="anio">
       <h2>Cuarto Año</h2>
       <div class="semestres">
-
-        <!-- VII Semestre -->
         <div class="semestre">
           <h3>VII Semestre</h3>
           <div class="ramos">
@@ -526,107 +678,237 @@
               <div class="card">
                 <div class="card-front">Abordaje en Niños, Niñas y Adolescentes II</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.<br>Asignatura con Actividad Práctica.<br>Asignatura con Simulación Clínica.
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br><br>
+                  Abre: Abordaje de la Deglución y Alimentación Oral.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Abordaje en Adultos y Personas Mayores II</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación Profesional en el Curso de Vida.<br>Asignatura con Actividad Práctica.<br>Asignatura con Simulación Clínica.
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Simulación Clínica.<br><br>
+                  Abre: Abordaje de la Deglución y Alimentación Oral.
                 </div>
               </div>
             </div>
-            <div class="ramo" onclick="toggleAprobado(this)">
-              <div class="card">
-                <div class="card-front">Metodología de la Investigación</div>
-                <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Formación en Investigación Gestión, Innovación y Liderazgo.
-                </div>
-              </div>
-            </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
                 <div class="card-front">Electivo II</div>
                 <div class="card-back">
-                  Asignatura Electiva.<br>Asignaturas Electivas Articulables con Postgrado.
+                  Asignatura Electiva.<br>
+                  Asignaturas Electivas Articulables con Postgrado.
+                </div>
+              </div>
+            </div>
+
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Abordaje Auditivo en el Curso de Vida</div>
+                <div class="card-back">
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Simulación Clínica.<br><br>
+                  Abre: Abordaje Vesicular en el Curso de Vida.
+                </div>
+              </div>
+            </div>
+
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Abordaje de la Voz Hablada y Cantada I</div>
+                <div class="card-back">
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Simulación Clínica.<br><br>
+                  Abre: Abordaje de la Voz Hablada y Cantada II.
+                </div>
+              </div>
+            </div>
+
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Práctica Curricular I</div>
+                <div class="card-back">
+                  Asignatura de Formación Profesional.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Centro de Práctica / Campo Profesional.<br><br>
+                  Abre: Práctica Curricular II.
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- VIII Semestre -->
         <div class="semestre">
           <h3>VIII Semestre</h3>
           <div class="ramos">
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
-                <div class="card-front">Electivo III</div>
+                <div class="card-front">Metodología de la Investigación</div>
                 <div class="card-back">
-                  Asignatura Electiva.<br>Asignaturas Electivas Articulables con Postgrado.
+                  Asignatura de Formación Profesional.<br>
+                  Formación en Investigación Gestión, Innovación y Liderazgo.<br>
+                  Asignatura con Actividad Práctica.<br><br>
+                  Abre: Seminario de Grado I.
                 </div>
               </div>
             </div>
+
             <div class="ramo" onclick="toggleAprobado(this)">
               <div class="card">
-                <div class="card-front">Trabajo de Título I</div>
+                <div class="card-front">Abordaje de la Deglución y Alimentación Oral</div>
                 <div class="card-back">
-                  Asignatura de Formación Profesional.<br>Trabajo de Graduación.
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.
+                </div>
+              </div>
+            </div>
+
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Electivo III</div>
+                <div class="card-back">
+                  Asignatura Electiva.<br>
+                  Asignaturas Electivas Articulables con Postgrado.
+                </div>
+              </div>
+            </div>
+
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Evaluación del Desarrollo de Competencias MEC FON HITO 2</div>
+                <div class="card-back">
+                  Asignatura de Formación Profesional.
+                </div>
+              </div>
+            </div>
+
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Abordaje Vesicular en el Curso de Vida</div>
+                <div class="card-back">
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Simulación Clínica.
+                </div>
+              </div>
+            </div>
+
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Abordaje de la Voz Hablada y Cantada II</div>
+                <div class="card-back">
+                  Asignatura de Formación Profesional.<br>
+                  Formación Profesional en el Curso de Vida.<br>
+                  Asignatura con Actividad Práctica.<br>
+                  Asignatura con Simulación Clínica.
+                </div>
+              </div>
+            </div>
+
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Práctica Curricular II</div>
+                <div class="card-back">
+                  Asignatura de Formación Profesional.<br>
+                  Asignatura con Centro de Práctica / Campo Profesional.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quinto Año -->
+    <div class="anio">
+      <h2>Quinto Año</h2>
+      <div class="semestres">
+        <div class="semestre">
+          <h3>IX Semestre</h3>
+          <div class="ramos">
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Seminario de Grado I</div>
+                <div class="card-back">
+                  Asignatura de Formación Profesional.<br>
+                  Formación en Investigación Gestión, Innovación y Liderazgo.<br><br>
+                  Abre: Seminario de Grado II.
+                </div>
+              </div>
+            </div>
+
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Internado Profesional I</div>
+                <div class="card-back">
+                  Asignatura con Centro de Práctica / Campo Profesional.
+                </div>
+              </div>
+            </div>
+
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Internado Profesional II</div>
+                <div class="card-back">
+                  Asignatura con Centro de Práctica / Campo Profesional.
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-      </div>
-    </div>
+        <div class="semestre">
+          <h3>X Semestre</h3>
+          <div class="ramos">
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Seminario de Grado II</div>
+                <div class="card-back">
+                  Asignatura de Formación Profesional.<br>
+                  Formación en Investigación Gestión, Innovación y Liderazgo.
+                </div>
+              </div>
+            </div>
 
-<!-- QUINTO AÑO -->
-<div class="anio">
-  <h2>Quinto Año</h2>
-  <div class="semestres">
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Internado III</div>
+                <div class="card-back">
+                  Asignatura con Centro de Práctica / Campo Profesional.
+                </div>
+              </div>
+            </div>
 
-    <!-- IX Semestre -->
-    <div class="semestre">
-      <h3>IX Semestre</h3>
-      <div class="ramos">
-        <div class="ramo" onclick="toggleAprobado(this)">
-          <div class="card">
-            <div class="card-front">Trabajo de Título II</div>
-            <div class="card-back">
-              Asignatura de Formación Profesional.<br>Trabajo de Graduación.
+            <div class="ramo" onclick="toggleAprobado(this)">
+              <div class="card">
+                <div class="card-front">Internado IV</div>
+                <div class="card-back">
+                  Asignatura con Centro de Práctica / Campo Profesional.
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- X Semestre -->
-    <div class="semestre">
-      <h3>X Semestre</h3>
-      <div class="ramos">
-        <div class="ramo" onclick="toggleAprobado(this)">
-          <div class="card">
-            <div class="card-front">Práctica Profesional Supervisada</div>
-            <div class="card-back">
-              Asignatura de Formación Profesional.<br>Práctica Profesional Supervisada.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
   </div>
 
   <script>
-    function toggleAprobado(ramoDiv) {
-      const card = ramoDiv.querySelector('.card');
+    function toggleAprobado(elem) {
+      const card = elem.querySelector('.card');
       card.classList.toggle('aprobado');
     }
   </script>
