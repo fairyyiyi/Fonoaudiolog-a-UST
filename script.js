@@ -106,3 +106,4 @@ h1 {
   text-decoration: line-through;
   color: white !important;
 }
+
