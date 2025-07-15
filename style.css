@@ -1,0 +1,84 @@
+body {
+  background-color: #e6f7f5;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #005a73;
+}
+
+.malla {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.anio {
+  background-color: #c2e8e4;
+  border-radius: 15px;
+  padding: 20px;
+  min-width: 300px;
+  max-width: 350px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.semestre {
+  margin-bottom: 20px;
+  background-color: #a6dcd8;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+h2, h3 {
+  text-align: center;
+}
+
+.ramo {
+  background-color: #7dcbd0;
+  color: white;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  perspective: 1000px;
+  transition: transform 0.3s, background-color 0.3s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.ramo:hover {
+  transform: scale(1.03);
+}
+
+.ramo::before {
+  content: attr(data-info);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px;
+  background-color: #7dcbd0;
+  color: white;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.ramo.clicked {
+  text-decoration: line-through;
+  background-color: #396b8c !important;
+  color: #ccc;
+}
