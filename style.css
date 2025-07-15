@@ -1,10 +1,9 @@
 body {
-  background-color: #e6f7f5;
+  margin: 0;
+  padding: 2rem;
+  background-color: #d0f0ec;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
-  margin: 0;
-  padding: 20px;
-  color: #333;
 }
 
 h1 {
@@ -14,71 +13,96 @@ h1 {
 
 .malla {
   display: flex;
-  flex-wrap: wrap;
+  gap: 1rem;
   justify-content: center;
-  gap: 30px;
-  margin-top: 20px;
-}
-
-.anio {
-  background-color: #c2e8e4;
-  border-radius: 15px;
-  padding: 20px;
-  min-width: 300px;
-  max-width: 350px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .semestre {
-  margin-bottom: 20px;
-  background-color: #a6dcd8;
+  background-color: #a0dcd7;
+  padding: 1rem;
   border-radius: 10px;
-  padding: 10px;
+  min-width: 200px;
 }
 
-h2, h3 {
+.semestre h3 {
   text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.ramos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .ramo {
-  background-color: #7dcbd0;
-  color: white;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
+  width: 150px;
+  height: 90px;
   perspective: 1000px;
-  transition: transform 0.3s, background-color 0.3s;
-  transform-style: preserve-3d;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.ramo.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.card {
   position: relative;
-}
-
-.ramo:hover {
-  transform: scale(1.03);
-}
-
-.ramo::before {
-  content: attr(data-info);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 12px;
-  background-color: #7dcbd0;
-  color: white;
-  border-radius: 10px;
-  backface-visibility: hidden;
-  transform: rotateY(180deg);
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  background-color: #92cce8;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
   text-align: center;
+  color: #000;
+  user-select: none;
 }
 
-.ramo.clicked {
+.ramo:hover .card {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  font-size: 8px;
+  background-color: #92cce8;
+  color: #000;
+  white-space: pre-line;
+}
+
+.card.aprobado {
+  background-color: #3a6ea5 !important;
+  color: white !important;
+  box-shadow: 0 0 10px #2b4c73;
+}
+
+.card.aprobado .card-front {
   text-decoration: line-through;
-  background-color: #396b8c !important;
-  color: #ccc;
+  color: white !important;
 }
