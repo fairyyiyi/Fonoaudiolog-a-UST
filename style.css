@@ -1,108 +1,134 @@
+/* style.css */
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0;
-  padding: 2rem;
-  background-color: #d0f0ec;
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
+  background: #fafafa;
+  margin: 20px;
+  color: #222;
 }
 
 h1 {
   text-align: center;
-  color: #005a73;
+  margin-bottom: 25px;
+  color: #3a4a63;
 }
 
 .malla {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 12px;
+  max-width: 100vw;
+  overflow-x: hidden;
+  padding: 0 10px;
 }
 
 .semestre {
-  background-color: #a0dcd7;
-  padding: 1rem;
-  border-radius: 10px;
-  min-width: 200px;
+  background: #e6f0ff;
+  border-radius: 8px;
+  padding: 8px 6px;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 460px;
 }
 
 .semestre h3 {
   text-align: center;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #2a3b5b;
+  margin-bottom: 8px;
 }
 
 .ramos {
+  flex-grow: 1;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 7px;
+  padding-right: 4px;
 }
 
 .ramo {
-  width: 150px;
-  height: 90px;
-  perspective: 1000px;
+  background: #d8e7ff;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 0.9rem;
   cursor: pointer;
-  opacity: 1;
-  transition: opacity 0.3s ease;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+  position: relative;
+  user-select: none;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+  word-break: break-word;
 }
 
-.ramo.disabled {
-  opacity: 0.3;
+.ramo.aprobado {
+  background-color: #3178c6;
+  color: #fff;
+}
+
+.ramo.aprobado .nombre-ramo {
+  text-decoration: line-through;
+}
+
+.ramo.inactivo {
+  opacity: 0.45;
+  cursor: not-allowed;
   pointer-events: none;
 }
 
-.card {
-  position: relative;
+/* Nombre del ramo separado para tachar solo el texto */
+.ramo .nombre-ramo {
   width: 100%;
-  height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  background-color: #92cce8;
-  border-radius: 6px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  text-align: center;
-  color: #000;
-  user-select: none;
 }
 
-.ramo:hover .card {
-  transform: rotateY(180deg);
+.ramo .detalle {
+  display: none;
+  white-space: pre-wrap;
+  padding-top: 6px;
+  font-size: 0.85rem;
+  color: #0c1e3f;
+  background: #f0f5ff;
+  border-radius: 0 0 6px 6px;
+  box-shadow: inset 0 0 6px rgb(0 0 0 / 0.05);
+  margin-top: 4px;
+  text-align: left;
+  cursor: default;
 }
 
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  text-align: center;
-  line-height: 1.3;
+/* Volteo con rotación Y */
+.ramo.flipped {
+  background-color: #3178c6;
+  color: white;
+  cursor: default;
 }
 
-.card-back {
-  transform: rotateY(180deg);
-  font-size: 8px;
-  background-color: #92cce8;
-  color: #000;
-  white-space: pre-line;
+.ramo.flipped .detalle {
+  display: block;
 }
 
-.card.aprobado {
-  background-color: #3a6ea5 !important;
-  color: white !important;
-  box-shadow: 0 0 10px #2b4c73;
-}
-
-.card.aprobado .card-front {
+.ramo.flipped .nombre-ramo {
   text-decoration: line-through;
-  color: white !important;
+  font-weight: 600;
+}
+
+/* Para evitar scroll horizontal */
+@media (max-width: 1300px) {
+  .malla {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .semestre {
+    height: auto;
+    max-height: 600px;
+  }
 }
