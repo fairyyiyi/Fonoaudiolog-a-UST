@@ -1,234 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Malla Interactiva Fonoaudiología UST</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Malla Interactiva Fonoaudiología UST</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0;
+    padding: 1.5rem;
+    background-color: #f8e8f8;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #4a2c56;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #6f4a7e;
+  }
+  .malla {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+  .semestre {
+    background: #f3d7f0;
+    border-radius: 12px;
+    min-width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0.8rem;
+    box-shadow: 0 0 8px rgba(168, 100, 194, 0.3);
+  }
+  .semestre h2 {
+    text-align: center;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+  .ramo {
+    background-color: #f7d9e3;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(255, 182, 193, 0.5);
+    color: #4a2c56;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, opacity 0.3s;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.6rem;
+    min-height: 70px;
+    text-align: center;
+    font-size: 13px;
+    margin-bottom: 0.7rem;
+  }
+  .ramo.inactivo {
+    cursor: default;
+    opacity: 0.5;
+    pointer-events: none;
+    filter: grayscale(40%);
+  }
+  .ramo.activo {
+    background: linear-gradient(135deg, #cda0f7, #a96ee1);
+    box-shadow: 0 0 15px 3px rgba(201, 125, 255, 0.7);
+    color: white;
+  }
+  .ramo.activo span.nombre {
+    text-decoration: line-through;
+  }
+  .ramo:hover:not(.inactivo):not(.activo) {
+    background-color: #f4b9d8;
+  }
+  .malla::-webkit-scrollbar {
+    height: 8px;
+  }
+  .malla::-webkit-scrollbar-track {
+    background: #f0d7f5;
+    border-radius: 10px;
+  }
+  .malla::-webkit-scrollbar-thumb {
+    background: #b48de6;
+    border-radius: 10px;
+  }
+</style>
 </head>
 <body>
-  <h1>Malla Interactiva Fonoaudiología UST</h1>
 
-  <div class="malla">
+<h1>Malla Interactiva Fonoaudiología UST</h1>
 
-    <!-- Semestres I a X -->
-
-    <div class="semestre" data-semestre="I">
-      <h2>I Semestre</h2>
-      <div class="ramo" data-nombre="Razonamiento Lógico Matemático" data-prerrequisitos="" data-descripcion="Abre Acústica y Biomecánica. Abre Estadística y Epidemiología en Fonoaudiología.">
-        Razonamiento Lógico Matemático
-      </div>
-      <div class="ramo" data-nombre="Introducción a la Fonoaudiología" data-prerrequisitos="" data-descripcion="Abre Comunicación y Lingüística.">
-        Introducción a la Fonoaudiología
-      </div>
-      <div class="ramo" data-nombre="Atención Básica de Urgencias" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Atención Básica de Urgencias
-      </div>
-      <div class="ramo" data-nombre="Taller de Competencias para el Aprendizaje" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Taller de Competencias para el Aprendizaje
-      </div>
-      <div class="ramo" data-nombre="Principios de la Biología" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Principios de la Biología
-      </div>
-      <div class="ramo" data-nombre="Taller de Competencias Comunicativas" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Taller de Competencias Comunicativas
-      </div>
-    </div>
-
-    <div class="semestre" data-semestre="II">
-      <h2>II Semestre</h2>
-      <div class="ramo" data-nombre="Acústica y Biomecánica" data-prerrequisitos="Razonamiento Lógico Matemático" data-descripcion="Abre Valoración Auditiva en el Curso de Vida I.">
-        Acústica y Biomecánica
-      </div>
-      <div class="ramo" data-nombre="Comunicación y Lingüística" data-prerrequisitos="Introducción a la Fonoaudiología" data-descripcion="Abre Significado y Estructuras del Lenguaje.">
-        Comunicación y Lingüística
-      </div>
-      <div class="ramo" data-nombre="Procesos Cognitivos y Desarrollo en el Curso de Vida" data-prerrequisitos="" data-descripcion="Abre Neuropsiquiatría.">
-        Procesos Cognitivos y Desarrollo en el Curso de Vida
-      </div>
-      <div class="ramo" data-nombre="Anatomía y Fisiología General" data-prerrequisitos="" data-descripcion="Abre Bases Morfofuncionales de la Fonoaudiología.">
-        Anatomía y Fisiología General
-      </div>
-      <div class="ramo" data-nombre="Salud y Sociedad" data-prerrequisitos="" data-descripcion="Abre Evaluación Participativa con la Comunidad.">
-        Salud y Sociedad
-      </div>
-      <div class="ramo" data-nombre="Cultura y Valores" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Cultura y Valores
-      </div>
-    </div>
-
-    <div class="semestre" data-semestre="III">
-      <h2>III Semestre</h2>
-      <div class="ramo" data-nombre="Estadística y Epidemiología en Fonoaudiología" data-prerrequisitos="Razonamiento Lógico Matemático" data-descripcion="Abre Valoración Auditiva en el Curso de Vida I.">
-        Estadística y Epidemiología en Fonoaudiología
-      </div>
-      <div class="ramo" data-nombre="Significado y Estructuras del Lenguaje" data-prerrequisitos="Comunicación y Lingüística" data-descripcion="Abre Lenguaje y Sociedad.">
-        Significado y Estructuras del Lenguaje
-      </div>
-      <div class="ramo" data-nombre="Neuropsiquiatría" data-prerrequisitos="Procesos Cognitivos y Desarrollo en el Curso de Vida" data-descripcion="Abre Desarrollo en el Adulto y Personas Mayores.">
-        Neuropsiquiatría
-      </div>
-      <div class="ramo" data-nombre="Bases Morfofuncionales de la Fonoaudiología" data-prerrequisitos="Anatomía y Fisiología General" data-descripcion="Abre Fonoestomatología. Abre Fisiopatología de la Comunicación.">
-        Bases Morfofuncionales de la Fonoaudiología
-      </div>
-      <div class="ramo" data-nombre="Personas y Sentido" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Personas y Sentido
-      </div>
-      <div class="ramo" data-nombre="Taller de Desarrollo Personal I" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Taller de Desarrollo Personal I
-      </div>
-      <div class="ramo" data-nombre="Inglés Básico I" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Inglés Básico I
-      </div>
-    </div>
-
-    <div class="semestre" data-semestre="IV">
-      <h2>IV Semestre</h2>
-      <div class="ramo" data-nombre="Evaluación del Desarrollo de Competencias MEC FON HITO 1" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Evaluación del Desarrollo de Competencias MEC FON HITO 1
-      </div>
-      <div class="ramo" data-nombre="Lenguaje y Sociedad" data-prerrequisitos="Significado y Estructuras del Lenguaje" data-descripcion="Abre Desarrollo en Niños, Niñas y Adolescentes. Abre Abordaje Fonoaudiológico en la Comunidad Educativa.">
-        Lenguaje y Sociedad
-      </div>
-      <div class="ramo" data-nombre="Fonoestamología" data-prerrequisitos="Bases Morfofuncionales de la Fonoaudiología" data-descripcion="Abre Desarrollo de la Voz y Técnica Vocal.">
-        Fonoestamología
-      </div>
-      <div class="ramo" data-nombre="Fisiopatología de la Comunicación" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Fisiopatología de la Comunicación
-      </div>
-      <div class="ramo" data-nombre="Evaluación Participativa con la Comunidad" data-prerrequisitos="Salud y Sociedad" data-descripcion="Abre Intervención Comunicativa.">
-        Evaluación Participativa con la Comunidad
-      </div>
-      <div class="ramo" data-nombre="Taller de Desarrollo Personal II" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Taller de Desarrollo Personal II
-      </div>
-      <div class="ramo" data-nombre="Inglés Básico II" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Inglés Básico II
-      </div>
-    </div>
-
-    <div class="semestre" data-semestre="V">
-      <h2>V Semestre</h2>
-      <div class="ramo" data-nombre="Valoración Auditiva en el Curso de Vida I" data-prerrequisitos="Acústica y Biomecánica; Estadística y Epidemiología en Fonoaudiología" data-descripcion="Abre Valoración Auditiva en el Curso de Vida II.">
-        Valoración Auditiva en el Curso de Vida I
-      </div>
-      <div class="ramo" data-nombre="Desarrollo en Niños, Niñas y Adolescentes I" data-prerrequisitos="Lenguaje y Sociedad" data-descripcion="Abre Abordaje en Niños, Niñas y Adolescentes I.">
-        Desarrollo en Niños, Niñas y Adolescentes I
-      </div>
-      <div class="ramo" data-nombre="Desarrollo en el Adulto y Presonas Mayores" data-prerrequisitos="Neuropsiquiatría" data-descripcion="Abre Abordaje en Adultos y Personas Mayores I.">
-        Desarrollo en el Adulto y Presonas Mayores
-      </div>
-      <div class="ramo" data-nombre="Abordaje Fonoaudiológico en la Comunicación Educativa" data-prerrequisitos="" data-descripcion="Bases de la Rehabilitación y Redes Integradas de Servicio de Salud.">
-        Abordaje Fonoaudiológico en la Comunicación Educativa
-      </div>
-      <div class="ramo" data-nombre="Intervención Comunitaria" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Intervención Comunitaria
-      </div>
-      <div class="ramo" data-nombre="Ética y Salud" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Ética y Salud
-      </div>
-    </div>
-
-    <div class="semestre" data-semestre="VI">
-      <h2>VI Semestre</h2>
-      <div class="ramo" data-nombre="Gestión e Innovación en Fonoaudiología" data-prerrequisitos="" data-descripcion="Abre Metodología de la Investigación.">
-        Gestión e Innovación en Fonoaudiología
-      </div>
-      <div class="ramo" data-nombre="Abordaje en Niños, Niñas y Adolescentes I" data-prerrequisitos="Desarrollo en Niños, Niñas y Adolescentes I" data-descripcion="Abre Abordaje en Niños, Niñas y Adolescentes II.">
-        Abordaje en Niños, Niñas y Adolescentes I
-      </div>
-      <div class="ramo" data-nombre="Abordaje en Adultos y Personas Mayores I" data-prerrequisitos="Desarrollo en el Adulto y Presonas Mayores" data-descripcion="Abre Abordaje en Adultos y Personas Mayores II.">
-        Abordaje en Adultos y Personas Mayores I
-      </div>
-      <div class="ramo" data-nombre="Bases de la Rehabilitación y Redes Integradas de Servicio de Salud" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Bases de la Rehabilitación y Redes Integradas de Servicio de Salud
-      </div>
-      <div class="ramo" data-nombre="Valoración Auditiva en el Curso de Vida II" data-prerrequisitos="Valoración Auditiva en el Curso de Vida I" data-descripcion="Abre Abordaje de la Voz Hablada y Cantada I.">
-        Valoración Auditiva en el Curso de Vida II
-      </div>
-      <div class="ramo" data-nombre="Desarrollo de la Voz y Técnica Vocal" data-prerrequisitos="Fonoestamología" data-descripcion="Abre Abordaje de la Voz Hablada y Cantada I.">
-        Desarrollo de la Voz y Técnica Vocal
-      </div>
-      <div class="ramo" data-nombre="Electivo I" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Electivo I
-      </div>
-    </div>
-
-    <div class="semestre" data-semestre="VII">
-      <h2>VII Semestre</h2>
-      <div class="ramo" data-nombre="Abordaje en Niños, Niñas y Adolescentes II" data-prerrequisitos="Abordaje en Niños, Niñas y Adolescentes I" data-descripcion="Abre Abordaje de la Deglución y Alimentación Oral.">
-        Abordaje en Niños, Niñas y Adolescentes II
-      </div>
-      <div class="ramo" data-nombre="Abordaje en Adultos y Personas Mayores II" data-prerrequisitos="Abordaje en Adultos y Personas Mayores I" data-descripcion="Abre Abordaje de la Deglución y Alimentación Oral.">
-        Abordaje en Adultos y Personas Mayores II
-      </div>
-      <div class="ramo" data-nombre="Electivo II" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Electivo II
-      </div>
-      <div class="ramo" data-nombre="Abordaje Auditivo en el Curso de Vida" data-prerrequisitos="" data-descripcion="Abre Abordaje Vesicular en el Curso de Vida.">
-        Abordaje Auditivo en el Curso de Vida
-      </div>
-      <div class="ramo" data-nombre="Abordaje de la Voz Hablada y Cantada I" data-prerrequisitos="Desarrollo de la Voz y Técnica Vocal" data-descripcion="Abre Abordaje de la Voz Hablada y Cantada II.">
-        Abordaje de la Voz Hablada y Cantada I
-      </div>
-      <div class="ramo" data-nombre="Práctica Curricular I" data-prerrequisitos="" data-descripcion="Abre Práctica Curricular II.">
-        Práctica Curricular I
-      </div>
-    </div>
-
-    <div class="semestre" data-semestre="VIII">
-      <h2>VIII Semestre</h2>
-      <div class="ramo" data-nombre="Metodología de la Investigación" data-prerrequisitos="Gestión e Innovación en Fonoaudiología" data-descripcion="Abre Seminario de Grado I.">
-        Metodología de la Investigación
-      </div>
-      <div class="ramo" data-nombre="Abordaje de la Deglución y Alimentación Oral" data-prerrequisitos="Abordaje en Niños, Niñas y Adolescentes II" data-descripcion="No abre nada.">
-        Abordaje de la Deglución y Alimentación Oral
-      </div>
-      <div class="ramo" data-nombre="Electivo III" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Electivo III
-      </div>
-      <div class="ramo" data-nombre="Evaluación del Desarrollo de Competencias MEC FON HITO 2" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Evaluación del Desarrollo de Competencias MEC FON HITO 2
-      </div>
-      <div class="ramo" data-nombre="Abordaje Vesicular en el Curso de Vida" data-prerrequisitos="Abordaje Auditivo en el Curso de Vida" data-descripcion="No abre nada.">
-        Abordaje Vesicular en el Curso de Vida
-      </div>
-      <div class="ramo" data-nombre="Abordaje de la Voz Hablada y Cantada II" data-prerrequisitos="Abordaje de la Voz Hablada y Cantada I" data-descripcion="No abre nada.">
-        Abordaje de la Voz Hablada y Cantada II
-      </div>
-      <div class="ramo" data-nombre="Práctica Curricular II" data-prerrequisitos="Práctica Curricular I" data-descripcion="No abre nada.">
-        Práctica Curricular II
-      </div>
-    </div>
-
-    <div class="semestre" data-semestre="IX">
-      <h2>IX Semestre</h2>
-      <div class="ramo" data-nombre="Seminario de Grado I" data-prerrequisitos="Metodología de la Investigación" data-descripcion="Abre Seminario de Grado II.">
-        Seminario de Grado I
-      </div>
-      <div class="ramo" data-nombre="Internado Profesional I" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Internado Profesional I
-      </div>
-      <div class="ramo" data-nombre="Internado Profesional II" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Internado Profesional II
-      </div>
-    </div>
-
-    <div class="semestre" data-semestre="X">
-      <h2>X Semestre</h2>
-      <div class="ramo" data-nombre="Seminario de Grado II" data-prerrequisitos="Seminario de Grado I" data-descripcion="No abre nada.">
-        Seminario de Grado II
-      </div>
-      <div class="ramo" data-nombre="Internado III" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Internado III
-      </div>
-      <div class="ramo" data-nombre="Internado IV" data-prerrequisitos="" data-descripcion="No abre nada.">
-        Internado IV
-      </div>
-    </div>
-
+<div class="malla">
+  <!-- Semestres aquí -->
+  <div class="semestre" data-semestre="I">
+    <h2>I Semestre</h2>
+    <div class="ramo" data-nombre="Razonamiento Lógico Matemático" data-prerrequisitos=""><span class="nombre">Razonamiento Lógico Matemático</span></div>
+    <div class="ramo" data-nombre="Introducción a la Fonoaudiología" data-prerrequisitos=""><span class="nombre">Introducción a la Fonoaudiología</span></div>
+    <div class="ramo" data-nombre="Atención Básica de Urgencias" data-prerrequisitos=""><span class="nombre">Atención Básica de Urgencias</span></div>
+    <div class="ramo" data-nombre="Taller de Competencias para el Aprendizaje" data-prerrequisitos=""><span class="nombre">Taller de Competencias para el Aprendizaje</span></div>
+    <div class="ramo" data-nombre="Principios de la Biología" data-prerrequisitos=""><span class="nombre">Principios de la Biología</span></div>
+    <div class="ramo" data-nombre="Taller de Competencias Comunicativas" data-prerrequisitos=""><span class="nombre">Taller de Competencias Comunicativas</span></div>
   </div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <div class="semestre" data-semestre="II">
+    <h2>II Semestre</h2>
+    <div class="ramo" data-nombre="Acústica y Biomecánica" data-prerrequisitos="Razonamiento Lógico Matemático"><span class="nombre">Acústica y Biomecánica</span></div>
+    <div class="ramo" data-nombre="Comunicación y Lingüística" data-prerrequisitos="Introducción a la Fonoaudiología"><span class="nombre">Comunicación y Lingüística</span></div>
+    <div class="ramo" data-nombre="Procesos Cognitivos y Desarrollo en el Curso de Vida" data-prerrequisitos=""><span class="nombre">Procesos Cognitivos y Desarrollo en el Curso de Vida</span></div>
+    <div class="ramo" data-nombre="Anatomía y Fisiología General" data-prerrequisitos=""><span class="nombre">Anatomía y Fisiología General</span></div>
+    <div class="ramo" data-nombre="Salud y Sociedad" data-prerrequisitos=""><span class="nombre">Salud y Sociedad</span></div>
+    <div class="ramo" data-nombre="Cultura y Valores" data-prerrequisitos=""><span class="nombre">Cultura y Valores</span></div>
+  </div>
+
+  <div class="semestre" data-semestre="III">
+    <h2>III Semestre</h2>
+    <div class="ramo" data-nombre="Estadística y Epidemiología en Fonoaudiología" data-prerrequisitos="Razonamiento Lógico Matemático"><span class="nombre">Estadística y Epidemiología en Fonoaudiología</span></div>
+    <div class="ramo" data-nombre="Significado y Estructuras del Lenguaje" data-prerrequisitos="Comunicación y Lingüística"><span class="nombre">Significado y Estructuras del Lenguaje</span></div>
+    <div class="ramo" data-nombre="Neuropsiquiatría" data-prerrequisitos=""><span class="nombre">Neuropsiquiatría</span></div>
+    <div class="ramo" data-nombre="Bases Morf
