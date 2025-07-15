@@ -1,44 +1,152 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Malla Fonoaudiología UST</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      background-color: #d0f0ec; /* turquesa pastel */
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+    }
+
+    .malla {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+
+    .anio {
+      background-color: #a0dcd7; /* 2 tonos más oscuros que el fondo */
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .anio h2 {
+      text-align: center;
+      margin: 0 0 1rem 0;
+    }
+
+    .semestre {
+      background-color: #7bc9c4; /* más oscuro que año */
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+
+    .semestre h3 {
+      text-align: center;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .ramos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .ramo {
+      width: 150px;
+      height: 90px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .ramo:hover .card {
+      transform: rotateY(180deg) scale(1.05);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      text-align: center;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      background-color: #92cce8; /* color base de ramos */
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    .card.aprobado {
+      background-color: #4a87b8 !important; /* azul más oscuro */
+    }
+
+    .card.aprobado .card-front,
+    .card.aprobado .card-back {
+      text-decoration: line-through;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-  <h1>Malla Interactiva - Fonoaudiología UST</h1>
+  <h1 style="text-align:center;">Malla Interactiva Fonoaudiología UST</h1>
   <div class="malla">
-
-    <!-- Ejemplo de una columna de año con semestres -->
+    <!-- PRIMER AÑO -->
     <div class="anio">
       <h2>Primer Año</h2>
+
+      <!-- Semestre I -->
       <div class="semestre">
         <h3>I Semestre</h3>
-        <div class="ramo" data-info="Asignatura Ciencias Básicas; Formación Disciplinar en el Curso de Vida">Razonamiento Lógico Matemático</div>
-        <div class="ramo" data-info="Asignatura de Formación Profesional; Formación Disciplinar en el Curso de Vida; Asignatura con Actividad Práctica; Asignatura con Simulación Clínica">Introducción a la Fonoaudiología</div>
-        <div class="ramo" data-info="Asignatura común de Facultad; Formación de Facultad Interdisciplinarias; Asignatura con Simulación Clínica">Atención Básica de Urgencias</div>
-        <div class="ramo" data-info="Asignatura Ciencias Básicas; Formación General">Taller de Competencias para el Aprendizaje</div>
-        <div class="ramo" data-info="Asignatura Ciencias Básicas; Formación Disciplinar en el Curso de Vida; Asignatura con Actividad Práctica">Principios de la Biología</div>
-        <div class="ramo" data-info="Asignatura de Formación General; Formación General">Taller de Competencias Comunicativas</div>
+        <div class="ramos">
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Razonamiento Lógico Matemático</div>
+              <div class="card-back">Ciencias Básicas; Formación Disciplinar en el Curso de Vida</div>
+            </div>
+          </div>
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Introducción a la Fonoaudiología</div>
+              <div class="card-back">Formación Profesional; Disciplinar; Práctica; Simulación Clínica</div>
+            </div>
+          </div>
+          <!-- Agrega más ramos aquí... -->
+        </div>
       </div>
 
+      <!-- Semestre II -->
       <div class="semestre">
         <h3>II Semestre</h3>
-        <div class="ramo" data-info="Asignatura de Formación Profesional; Formación General; Asignatura con Actividad Práctica">Acústica y Biomecánica</div>
-        <div class="ramo" data-info="Asignatura de Formación Profesional; Formación Disciplinar en el Curso de Vida; Asignatura con Actividad Práctica">Comunicación y Lingüística</div>
-        <div class="ramo" data-info="Asignatura de Formación Profesional; Formación Disciplinar en el Curso de Vida">Procesos Cognitivos y Desarrollo en el Curso de Vida</div>
-        <div class="ramo" data-info="Asignatura de Formación Profesional; Formación Disciplinar en el Curso de Vida; Asignatura con Actividad Práctica">Anatomía y Fisiología General</div>
-        <div class="ramo" data-info="Asignatura común de Facultad; Formación de Facultad Interdisciplinarias">Salud y Sociedad</div>
-        <div class="ramo" data-info="Asignatura de Formación General; Formación General">Cultura y Valores</div>
+        <div class="ramos">
+          <div class="ramo" onclick="toggleAprobado(this)">
+            <div class="card">
+              <div class="card-front">Acústica y Biomecánica</div>
+              <div class="card-back">Formación Profesional; General; Práctica</div>
+            </div>
+          </div>
+          <!-- Agrega más ramos aquí... -->
+        </div>
       </div>
     </div>
 
-    <!-- Agrega aquí Segundo Año, Tercer Año, Cuarto Año y Quinto Año con la misma estructura -->
-    <!-- Puedes copiar/pegar y cambiar los títulos y asignaturas -->
-
+    <!-- Puedes duplicar la estructura para Segundo Año, Tercer Año, etc. -->
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    function toggleAprobado(element) {
+      element.querySelector('.card').classList.toggle('aprobado');
+    }
+  </script>
 </body>
 </html>
